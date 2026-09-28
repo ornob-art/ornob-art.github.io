@@ -1,0 +1,470 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout>
+  <Header />
+
+  <!-- Main Content Area -->
+  <main class="site-main">
+    <div class="container">
+      
+      <!-- Breadcrumbs -->
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">প্রচ্ছদ</a>
+        <span class="breadcrumbs-sep">/</span>
+        <a href="/#articles">দর্শন ও সমাজভাবনা</a>
+        <span class="breadcrumbs-sep">/</span>
+        <span>শব্দ ও নীরবতার সীমানায়</span>
+      </nav>
+
+      <div class="layout-grid">
+        
+        <!-- Left Column: Detailed Single Article Content -->
+        <div class="content-column">
+          
+          <article class="single-article">
+            
+            <!-- Article Header -->
+            <header class="single-header">
+              <span class="single-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+                দর্শন ও সমাজভাবনা
+              </span>
+
+              <h1 class="single-title">
+                শব্দ ও নীরবতার সীমানায়: আধুনিক মানুষের আত্মানুসন্ধান
+              </h1>
+
+              <div class="single-meta">
+                <div class="single-meta-left">
+                  <div class="single-avatar">অ</div>
+                  <div class="single-author-info">
+                    <h4>ড. অনির্বাণ চৌধুরী</h4>
+                    <p>প্রাবন্ধিক ও অধ্যাপক, দর্শন বিভাগ</p>
+                  </div>
+                </div>
+
+                <div class="single-meta-right">
+                  <div class="meta-pill">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                      <line x1="16" y1="2" x2="16" y2="6"></line>
+                      <line x1="8" y1="2" x2="8" y2="6"></line>
+                    </svg>
+                    <span>১৫ সেপ্টেম্বর, ২০২৬</span>
+                  </div>
+                  <div class="meta-pill">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    <span>পড়ার সময়: ৭ মিনিট</span>
+                  </div>
+                  <div class="meta-pill">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <a href="#comments" style="color: inherit; text-decoration: none;">৩টি মন্তব্য</a>
+                  </div>
+                </div>
+              </div>
+            </header>
+
+            <!-- Featured Image Placeholder -->
+            <div class="featured-image-container">
+              <div class="featured-image-frame" role="img" aria-label="শিল্পিত চিত্রকর্ম: নীরবতার প্রতীকী রূপ">
+                <div class="featured-image-pattern"></div>
+                <div class="featured-image-icon">
+                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m18 2-7.5 7.5"></path>
+                    <path d="m22 7-7.5 7.5"></path>
+                    <path d="m2 22 5.5-1.5L21.3 6.7a2.83 2.83 0 0 0-4-4L3.5 16.5 2 22z"></path>
+                  </svg>
+                </div>
+                <h3 class="featured-image-title">শব্দ, আলো ও শূন্যতার কাব্যিক মিলন</h3>
+                <span class="featured-image-sub">সুবর্ণপত্র আলোকচিত্র ও শিল্পকোষ • বিশেষ প্রচ্ছদ চিত্র</span>
+              </div>
+              <div class="featured-image-caption">
+                <span>প্রতীকি চিত্র: নীরবতার মাঝে মানুষের অন্তরাত্মার অনুসন্ধান ও আত্মোপলব্ধির আবহ।</span>
+                <span>ছবি: সুবর্ণপত্র আর্কাইভ</span>
+              </div>
+            </div>
+
+            <!-- Detailed Body Content (4-5 Rich Bengali Paragraphs) -->
+            <div class="single-content">
+              <p class="lead-p">
+                আমাদের প্রাত্যহিক জীবনের চতুষ্পার্শ্বে আজ এক সর্বগ্রাসী কোলাহলের রাজত্ব। কলকারখানার ধাতব গর্জন, রাজপথের ট্রাফিকের বিরামহীন শব্দতরঙ্গ আর হাতের মুঠোয় থাকা ডিজিটাল পর্দার অফুরন্ত নোটিফিকেশন—সব মিলিয়ে আধুনিক মানুষ আজ শব্দতাণ্ডবের এক অচলায়তনে বন্দী হয়ে পড়েছে। অথচ মানব সভ্যতার আদিমতম দার্শনিকেরা বারবার একটি অনস্বীকার্য সত্য স্মরণ করিয়ে দিয়েছেন: নীরবতাই সমস্ত মহান সৃষ্টির গর্ভগৃহ।
+              </p>
+
+              <h2>কোলাহলময় বর্তমান এবং অন্তর্লীন একাকীত্ব</h2>
+              <p>
+                মনোবিজ্ঞানীদের মতে, একজন সমকালীন নাগরিক প্রতিদিন প্রায় সহস্রাধিক অহেতুক তথ্য ও শব্দের মুখোমুখি হন। এতে মস্তিষ্কের অনুভূতিশীল স্নায়ুকোষগুলো স্থায়ী ক্লান্তিতে নিমজ্জিত হয়। আমরা যখন ক্রমাগত বাইরের জগতের শব্দ শুনতে বাধ্য হই, তখন নিজেদের ভেতরের কণ্ঠস্বরটি ম্লান হতে হতে একসময় সম্পূর্ণ স্তব্ধ হয়ে যায়। প্রযুক্তির বিপুল সংযোগ মানুষকে বাহ্যিকভাবে কাছাকাছি আনলেও মানসিকভাবে ঠেলে দিয়েছে এক অতল নিঃসঙ্গতার গহ্বরে।
+              </p>
+
+              <blockquote class="single-quote">
+                “যেখানে শব্দের আনুষ্ঠানিক পরিসমাপ্তি ঘটে, ঠিক সেখান থেকেই শুরু হয় আত্মদর্শনের প্রথম উন্মোচন। নীরবতা কোনো জড় শূন্যতা নয়, বরং তা সহস্র অব্যক্ত অনুভূতির পরিপূর্ণ সঙ্গীত।”
+              </blockquote>
+
+              <h2>সাহিত্যের আশ্রয়: শব্দের ভেতর নীরবতার সন্ধান</h2>
+              <p>
+                সাহিত্য আসলে কী? তা কি কেবল কতগুলো সুবিন্যস্ত অক্ষরের সমষ্টি? গভীরভাবে নিরীক্ষণ করলে বোঝা যায়, সার্থক সাহিত্যের কাজ কেবল শব্দ তৈরি করা নয়, বরং শব্দের মধ্য দিয়ে এমন এক গভীর নীরবতার পরিবেশ সৃষ্টি করা, যা পাঠককে নিজের মুখোমুখি দাঁড় করিয়ে দেয়। জীবনানন্দ দাশ যখন লেখেন—<em>‘হায় চিল, সোনালী ডানার চিল, এই ভিজে মেঘের দুপুরে তুমি আর উড়ে উড়ে কেঁদো পণ্ডিত ধানসিঁড়ি নদীটির পাশে’</em>—তখন সেই পঙ্‌ক্তির অন্তরালে এক নিস্তব্ধ হাহাকার জন্ম নেয়, যা কোনো জাগতিক শব্দের দ্বারা পরিমাপ করা যায় বাধা যায় না।
+              </p>
+
+              <p>
+                প্রাচ্যের ভাবুক সম্প্রদায় এবং সুফি দার্শনিকরা নীরবতাকে একটি সাধনমার্গ হিসেবে বিবেচনা করতেন। মৌনতা কেবল মুখ বন্ধ রাখা নয়, তা হলো মনের অনর্থক চিন্তা ও অহমিকার কোলাহলকে শান্ত করা। এই প্রশান্তির ভেতর দিয়েই মানুষ তার চারপাশের মানুষ, প্রকৃতি ও বিশ্বজগতের সাথে এক পরম আত্মিক যোগসূত্র অনুভব করতে পারে।
+              </p>
+
+              <h2>প্রাত্যহিক জীবনে আত্মানুসন্ধানের পুনর্জাগরণ</h2>
+              <p>
+                বর্তমান অতি-সংযুক্ত (hyper-connected) সমাজব্যবস্থা থেকে বিচ্ছিন্ন হওয়া হয়তো পুরোপুরি সম্ভব নয়, তবে প্রতিদিন অন্তত কিছুক্ষণ স্বেচ্ছায় সমস্ত ডিজিটাল সংযোগ ছিন্ন করে নিজের ভেতরে ডুব দেওয়া একান্ত জরুরি। একটি ভালো বই পাঠ, গোধূলির আলোয় নীরব পদচারণা কিংবা প্রিয়জনের সাথে নিঃশব্দ বসে থাকার মুহূর্তগুলো আমাদের হারিয়ে যাওয়া মানসিক স্বাস্থ্য ও মানবিক সহমর্মিতাকে পুনরুজ্জীবিত করতে সক্ষম। শব্দ ও নীরবতার এই দ্বন্দ্বে বিজয়ী হতে হলে আমাদের শিখতে হবে কখন বলতে হবে আর কখন শুনতে হবে নীরবতার অমর সুর।
+              </p>
+            </div>
+
+            <!-- Article Footer Tags & Share Toolbar -->
+            <div class="article-footer-toolbar">
+              <div class="article-tags">
+                <span class="tag-label">ট্যাগসমূহ:</span>
+                <a href="/#articles" class="article-tag">#দর্শন</a>
+                <a href="/#articles" class="article-tag">#সাহিত্য_ভাবনা</a>
+                <a href="/#articles" class="article-tag">#মনস্তত্ত্ব</a>
+                <a href="/#articles" class="article-tag">#নীরবতা</a>
+              </div>
+
+              <div class="share-bar">
+                <span class="share-label">শেয়ার করুন:</span>
+                <button class="share-btn" onclick="shareArticle('facebook')" aria-label="Share on Facebook">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                  </svg>
+                </button>
+                <button class="share-btn" onclick="shareArticle('twitter')" aria-label="Share on Twitter">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                  </svg>
+                </button>
+                <button class="share-btn" onclick="copyArticleLink()" aria-label="Copy Link" id="copy-link-btn" title="লিঙ্ক কপি করুন">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Author Bio Box -->
+            <div class="author-box">
+              <div class="author-box-avatar">অ</div>
+              <div class="author-box-info">
+                <h4>ড. অনির্বাণ চৌধুরী</h4>
+                <p class="author-box-title">প্রাবন্ধিক, গবেষক ও সাহিত্য সমালোচক</p>
+                <p class="author-box-bio">
+                  ঢাকা বিশ্ববিদ্যালয়ের দর্শন বিভাগের অধ্যাপক। সমকালীন সমাজতত্ত্ব, তুলনামূলক সাহিত্য এবং প্রাচ্য ও পাশ্চাত্য নন্দনতত্ত্বের আন্তঃসম্পর্ক নিয়ে নিয়মিত গবেষণা ও লেখালেখি করেন। প্রকাশিত গ্রন্থ: 'আধুনিকতার সংকট ও নান্দনিক বিকল্প' (২০২২)।
+                </p>
+              </div>
+            </div>
+
+            <!-- Post Navigation (Previous / Next) -->
+            <nav class="post-nav" aria-label="Post Navigation">
+              <a href="/single-post" class="post-nav-card">
+                <span class="post-nav-direction">← পূর্ববর্তী রচনা</span>
+                <span class="post-nav-title">রবীন্দ্রনাথের শেষ পর্বের কবিতা: রূপান্তরের আলো ও ছায়া</span>
+              </a>
+              <a href="/single-post" class="post-nav-card" style="text-align: right;">
+                <span class="post-nav-direction" style="justify-content: flex-end;">পরবর্তী রচনা →</span>
+                <span class="post-nav-title">মেঘভাঙা রোদ এবং একটি হলুদ খামের গল্প</span>
+              </a>
+            </nav>
+
+          </article>
+
+          <!-- Comments Section (মন্তব্য) -->
+          <section class="comments-section" id="comments">
+            
+            <div class="comments-head">
+              <h3 class="comments-title">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                পাঠকদের মন্তব্য
+              </h3>
+              <span class="comments-count-badge" id="comment-count-badge">৩টি মন্তব্য</span>
+            </div>
+
+            <!-- Existing Comments List -->
+            <ul class="comment-list" id="comment-list">
+              
+              <!-- Comment 1 -->
+              <li class="comment-item">
+                <div class="comment-avatar">সু</div>
+                <div class="comment-content">
+                  <div class="comment-header">
+                    <span class="comment-author-name">সুব্রত মজুমদার</span>
+                    <span class="comment-date">১৫ সেপ্টেম্বর, ২০২৬ • দুপুর ১২:৪০</span>
+                  </div>
+                  <p class="comment-body">
+                    অসাধারণ ও সময়োপযোগী একটি প্রবন্ধ। বর্তমান দ্রুতগতির সময়ে আমরা সত্যিই নিজেদের জন্য ৫ মিনিট নির্জন সময় বের করতে ভুলে গেছি। লেখকের ভাষার গভীরতা ও দার্শনিক পর্যবেক্ষণ সত্যিই প্রশংসনীয়।
+                  </p>
+                  <button class="comment-reply-btn" onclick="replyToComment('সুব্রত মজুমদার')">উত্তর দিন</button>
+                </div>
+              </li>
+
+              <!-- Comment 2 -->
+              <li class="comment-item">
+                <div class="comment-avatar">ফা</div>
+                <div class="comment-content">
+                  <div class="comment-header">
+                    <span class="comment-author-name">ফারহানা রহমান</span>
+                    <span class="comment-date">১৫ সেপ্টেম্বর, ২০২৬ • বিকাল ৩:১৫</span>
+                  </div>
+                  <p class="comment-body">
+                    জীবনানন্দ দাশের উদ্ধৃতিটি হৃদয় ছুঁয়ে গেল। সাহিত্যের মধ্য দিয়ে যে নীরবতার কথা বলা হয়েছে, তা যেন আমাদের প্রাত্যহিক ক্লান্তিকে মুহূর্তেই দূর করে দেয়। সুবর্ণপত্রকে এমন সমৃদ্ধ লেখার জন্য সাধুবাদ জানাই।
+                  </p>
+                  <button class="comment-reply-btn" onclick="replyToComment('ফারহানা রহমান')">উত্তর দিন</button>
+                </div>
+              </li>
+
+              <!-- Comment 3 -->
+              <li class="comment-item">
+                <div class="comment-avatar">ত</div>
+                <div class="comment-content">
+                  <div class="comment-header">
+                    <span class="comment-author-name">তানজিমুল হক</span>
+                    <span class="comment-date">১৫ সেপ্টেম্বর, ২০২৬ • সন্ধ্যা ৬:২০</span>
+                  </div>
+                  <p class="comment-body">
+                    প্রযুক্তির অতি-সংযোগের সাথে নিঃসঙ্গতার যে প্যারাডক্স লেখক তুলে ধরেছেন, তা এক গভীর চিন্তার বিষয়। এই বিষয়ে তরুণ প্রজন্মের জন্য আরও বিশদ আলোচনা হওয়া প্রয়োজন।
+                  </p>
+                  <button class="comment-reply-btn" onclick="replyToComment('তানজিমুল হক')">উত্তর দিন</button>
+                </div>
+              </li>
+
+            </ul>
+
+            <!-- New Comment Form -->
+            <div class="comment-form-container">
+              <h4 class="comment-form-title">আপনার মন্তব্য প্রকাশ করুন</h4>
+              <p class="comment-form-desc">আপনার মতামত আমাদের লেখক ও পাঠকদের অনুপ্রাণিত করে। অনুগ্রহ করে শালীন ও প্রাসঙ্গিক মন্তব্য করুন।</p>
+              
+              <form class="comment-form" id="comment-form">
+                <div class="comment-form-row">
+                  <div class="comment-input-group">
+                    <label for="comment-author-input" class="comment-label">আপনার পূর্ণ নাম *</label>
+                    <input 
+                      type="text" 
+                      id="comment-author-input" 
+                      class="comment-input" 
+                      placeholder="যেমন: আহমদ শফিক" 
+                      required
+                    >
+                  </div>
+                  <div class="comment-input-group">
+                    <label for="comment-email-input" class="comment-label">ইমেইল ঠিকানা (প্রকাশিত হবে 편집 না) *</label>
+                    <input 
+                      type="email" 
+                      id="comment-email-input" 
+                      class="comment-input" 
+                      placeholder="name@example.com" 
+                      required
+                    >
+                  </div>
+                </div>
+
+                <div class="comment-input-group">
+                  <label for="comment-text-input" class="comment-label">আপনার সুচিন্তিত মন্তব্য লিখুন *</label>
+                  <textarea 
+                    id="comment-text-input" 
+                    class="comment-textarea" 
+                    placeholder="প্রবন্ধটি সম্পর্কে আপনার ভাবনা বা প্রতিক্রিয়া ব্যক্ত করুন..." 
+                    required
+                  ></textarea>
+                </div>
+
+                <button type="submit" class="comment-submit-btn" id="comment-submit-btn">
+                  <span>মন্তব্য প্রকাশ করুন</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                </button>
+              </form>
+            </div>
+
+          </section>
+
+        </div>
+
+        <!-- Right Column: Sidebar (সূচীপত্র ও অনুষঙ্গ) -->
+        <aside class="sidebar" aria-label="সূচীপত্র ও অনুষঙ্গ">
+          
+          <!-- Table of Contents / Categories (সূচীপত্র / বিষয়শ্রেণী) -->
+          <div class="widget">
+            <h3 class="widget-title">
+              <span>সূচীপত্র / বিষয়শ্রেণী</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+            </h3>
+            <ul class="toc-list">
+              <li>
+                <a href="/#articles" class="toc-item-link">
+                  <span class="toc-item-title">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                    সমগ্র রচনাসমগ্র
+                  </span>
+                  <span class="toc-item-count">৭টি</span>
+                </a>
+              </li>
+              <li>
+                <a href="/#articles" class="toc-item-link">
+                  <span class="toc-item-title">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                    সাহিত্য ও কাব্য
+                  </span>
+                  <span class="toc-item-count">১৪টি</span>
+                </a>
+              </li>
+              <li>
+                <a href="/#articles" class="toc-item-link">
+                  <span class="toc-item-title">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                    কথাসাহিত্য ও গল্প
+                  </span>
+                  <span class="toc-item-count">৯টি</span>
+                </a>
+              </li>
+              <li>
+                <a href="/#articles" class="toc-item-link active">
+                  <span class="toc-item-title">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                    দর্শন ও সমাজভাবনা
+                  </span>
+                  <span class="toc-item-count">১২টি</span>
+                </a>
+              </li>
+              <li>
+                <a href="/#articles" class="toc-item-link">
+                  <span class="toc-item-title">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                    বিজ্ঞান ও প্রযুক্তি
+                  </span>
+                  <span class="toc-item-count">৮টি</span>
+                </a>
+              </li>
+              <li>
+                <a href="/#articles" class="toc-item-link">
+                  <span class="toc-item-title">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                    ভ্রমণ ও ঐতিহ্য
+                  </span>
+                  <span class="toc-item-count">৭টি</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Popular / Trending Articles (জনপ্রিয় লেখা) -->
+          <div class="widget">
+            <h3 class="widget-title">
+              <span>জনপ্রিয় লেখা</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+              </svg>
+            </h3>
+            <ul class="popular-list">
+              <li class="popular-item" onclick="window.location.href='/single-post'">
+                <span class="popular-rank">১</span>
+                <div>
+                  <h4 class="popular-item-title">রবীন্দ্রনাথের শেষ পর্বের কবিতা: রূপান্তরের আলো ও ছায়া</h4>
+                  <span class="popular-item-date">পঠিত: ৩,৪২০ বার</span>
+                </div>
+              </li>
+              <li class="popular-item" onclick="window.location.href='/single-post'">
+                <span class="popular-rank">২</span>
+                <div>
+                  <h4 class="popular-item-title">শব্দ ও নীরবতার সীমানায়: আধুনিক মানুষের আত্মানুসন্ধান</h4>
+                  <span class="popular-item-date">পঠিত: ২,৯৮০ বার</span>
+                </div>
+              </li>
+              <li class="popular-item" onclick="window.location.href='/single-post'">
+                <span class="popular-rank">৩</span>
+                <div>
+                  <h4 class="popular-item-title">কৃত্রিম বুদ্ধিমত্তা ও মানবিক কল্পনাশক্তির ভবিষ্যৎ</h4>
+                  <span class="popular-item-date">পঠিত: ২,৬৪০ বার</span>
+                </div>
+              </li>
+              <li class="popular-item" onclick="window.location.href='/single-post'">
+                <span class="popular-rank">৪</span>
+                <div>
+                  <h4 class="popular-item-title">মেঘভাঙা রোদ এবং একটি হলুদ খামের গল্প</h4>
+                  <span class="popular-item-date">পঠিত: ২,১৫০ বার</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Weekly Literary Thought (সপ্তাহের সাহিত্য ভাবনা) -->
+          <div class="widget quote-widget">
+            <h3 class="widget-title">
+              <span>সপ্তাহের ভাবনা</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
+                <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
+              </svg>
+            </h3>
+            <blockquote class="quote-body">
+              “আলো যেমন আঁধারকে স্পর্শ করেই প্রকাশ পায়, তেমনি দুঃখের নিবিড় অনুভূতিই আনন্দের প্রকৃত স্বরূপকে চিনিয়ে দেয়।”
+            </blockquote>
+            <p class="quote-author">— রবীন্দ্রনাথ ঠাকুর</p>
+          </div>
+
+          <!-- Newsletter Signup (সুবর্ণপত্রিকা গ্রাহক) -->
+          <div class="widget newsletter-widget" id="newsletter">
+            <h3 class="widget-title">
+              <span>পত্রিকা গ্রাহক হন</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+            </h3>
+            <p class="newsletter-desc">প্রতি শুক্রবার নতুন সংখ্যা ও নির্বাচিত প্রবন্ধ আপনার ইমেইল ইনবক্সে পেতে বিনামূল্যে যুক্ত থাকুন।</p>
+            <form class="newsletter-form" id="newsletter-form">
+              <input 
+                type="email" 
+                class="newsletter-input" 
+                placeholder="আপনার ইমেইল ঠিকানা..." 
+                required
+              >
+              <button type="submit" class="newsletter-btn">গ্রাহক হোন</button>
+            </form>
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

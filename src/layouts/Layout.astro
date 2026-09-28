@@ -1,0 +1,25 @@
+---
+import '../styles/global.css'; // Optional, but we'll include styles.css directly from public in head for now
+---
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>সুবর্ণপত্র — চিন্তা, সাহিত্য ও সংস্কৃতির নান্দনিক প্রকাশ</title>
+  <meta name="description" content="সুবর্ণপত্র - সাহিত্য, দর্শন, কথাসাহিত্য, বিজ্ঞান ও সংস্কৃতির এক অনন্য বাংলা ব্লগ ও সাময়িকী।">
+  
+  <!-- Google Fonts: Noto Serif Bengali & Hind Siliguri -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="home">
+  <slot />
+  <!-- Script -->
+  <script is:inline src="/main.js"></script>
+</body>
+</html>
