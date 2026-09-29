@@ -1,6 +1,22 @@
 ---
 // Header.astro
+import { getCollection } from 'astro:content';
+const posts = await getCollection('posts');
+const searchData = posts.map(post => ({
+  id: post.id,
+  slug: post.slug,
+  title: post.data.title,
+  author: post.data.author,
+  category: post.data.category,
+  badge: post.data.badge,
+  excerpt: post.data.excerpt,
+  image: post.data.image || null
+}));
 ---
+
+<script is:inline define:vars={{ searchData }}>
+  window.SEARCH_DATA = searchData;
+</script>
 <!-- Top Metadata Bar -->
 <div class="top-bar">
   <div class="container">
@@ -65,6 +81,7 @@
           >
           <button class="search-clear-btn" id="search-clear-btn" aria-label="Clear search">✕</button>
         </div>
+        <div id="search-dropdown-results" class="search-dropdown" style="display: none;"></div>
       </div>
 
       <!-- Mobile Hamburger Toggle -->
