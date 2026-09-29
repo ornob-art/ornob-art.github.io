@@ -1,45 +1,51 @@
-name: Deploy Astro site to Pages
-
-on:
-  push:
-    branches: ["main", "master"]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Install dependencies
-        run: npm install
-      - name: Build with Astro
-        run: rm -f *.astro && mkdir -p src/styles && cp public/styles.css src/styles/global.css && npx astro build
-      - name: Upload Artifacts
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+media:
+  input: public/images
+  output: /images
+content:
+  - name: posts
+    label: Posts
+    type: collection
+    path: src/content/posts
+    format: frontmatter
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: author
+        label: Author
+        type: string
+        required: true
+      - name: date
+        label: Date
+        type: string
+        required: true
+      - name: category
+        label: Category
+        type: select
+        options:
+          - সাহিত্য
+          - কথাসাহিত্য
+          - বিজ্ঞান
+          - দর্শন
+          - ভ্রমণ
+        required: true
+      - name: badge
+        label: Badge
+        type: string
+      - name: readTime
+        label: Read Time
+        type: string
+      - name: featured
+        label: Featured
+        type: boolean
+        default: false
+      - name: image
+        label: Cover Image
+        type: image
+      - name: excerpt
+        label: Excerpt
+        type: text
+      - name: body
+        label: Body
+        type: rich-text
