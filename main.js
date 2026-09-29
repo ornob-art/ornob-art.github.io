@@ -138,106 +138,118 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================================================================== */
   if (searchInput && searchClearBtn) {
     const dropdownResults = document.getElementById('search-dropdown-results');
-    let debounceTimer;
+    const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html';
 
-    const performRestSearch = async (query) => {
+    const performSearch = (query) => {
+      query = query.toLowerCase().trim();
+      
+      // If empty query
       if (!query) {
-        if(dropdownResults) dropdownResults.style.display = 'none';
+        searchClearBtn.style.display = 'none';
+        if (dropdownResults) dropdownResults.style.display = 'none';
+        
+        // Reset homepage view
+        if (isHomePage) {
+          const activeBtn = document.querySelector('.filter-btn.active');
+          const activeCat = activeBtn ? activeBtn.dataset.filter : 'all';
+          if (typeof window.filterByCategory === 'function') {
+            window.filterByCategory(activeCat);
+          } else {
+            if (featuredArticle) featuredArticle.style.display = 'block';
+            postCards.forEach(card => card.style.display = 'flex');
+            if (noResults) noResults.style.display = 'none';
+          }
+        }
         return;
       }
       
-      if(dropdownResults) {
-        dropdownResults.style.display = 'block';
-        dropdownResults.innerHTML = '<div class="search-loading"><div class="spinner"></div>খোঁজা হচ্ছে...</div>';
-      }
+      searchClearBtn.style.display = 'block';
+      const allData = window.SEARCH_DATA || [];
+      
+      const matchedPosts = allData.filter(post => {
+        return (post.title && post.title.toLowerCase().includes(query)) ||
+               (post.excerpt && post.excerpt.toLowerCase().includes(query)) ||
+               (post.author && post.author.toLowerCase().includes(query)) ||
+               (post.category && post.category.toLowerCase().includes(query)) ||
+               (post.badge && post.badge.toLowerCase().includes(query));
+      });
 
-      try {
-        const primaryApiEndpoint = `${subornopotroData.restUrl}?search=${encodeURIComponent(query)}&per_page=6&_embed`;
-        const fallbackApiEndpoint = `${subornopotroData.fallbackUrl}&search=${encodeURIComponent(query)}&per_page=6&_embed`;
+      if (isHomePage) {
+        // Hide dropdown if on homepage, we filter the grid directly
+        if (dropdownResults) dropdownResults.style.display = 'none';
+        
+        // Visually reset category to 'all' so there's no conflict in user's mind
+        filterBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.filter === 'all'));
+        if (tocLinks) tocLinks.forEach(link => link.classList.toggle('active', link.dataset.category === 'all'));
+        if (navLinks) navLinks.forEach(link => link.classList.toggle('active', link.dataset.category === 'all'));
+        
+        const matchedSlugs = matchedPosts.map(p => `/posts/${p.slug}`);
+        let hasVisible = false;
 
-        let response = await fetch(primaryApiEndpoint);
-        if (!response.ok) {
-          response = await fetch(fallbackApiEndpoint);
-        }
-        if (!response.ok) throw new Error('Network response was not ok');
-        const data = await response.json();
-
-        if (data.length === 0) {
-          if(dropdownResults) dropdownResults.innerHTML = '<div class="search-empty">কোনো ফলাফল পাওয়া যায়নি</div>';
-          return;
-        }
-
-        let html = '';
-        data.forEach(post => {
-          let thumbnail = '';
-          if (post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0]) {
-            thumbnail = post._embedded['wp:featuredmedia'][0].source_url;
+        if (featuredArticle) {
+          const featLink = featuredArticle.querySelector('a').getAttribute('href');
+          if (matchedSlugs.includes(featLink)) {
+            featuredArticle.style.display = 'block';
+            hasVisible = true;
+          } else {
+            featuredArticle.style.display = 'none';
           }
-          
-          let terms = [];
-          if (post._embedded && post._embedded['wp:term']) {
-            post._embedded['wp:term'].forEach(tax => {
-              tax.forEach(term => terms.push(term.name));
-            });
-          }
-          const catName = terms.length > 0 ? terms[0] : 'Uncategorized';
-          
-          // Basic highlighting
-          const title = post.title.rendered.replace(new RegExp(query, 'gi'), match => `<mark>${match}</mark>`);
+        }
 
-          html += `
-            <a href="${post.link}" class="search-result-item">
-              ${thumbnail ? `<div class="search-result-thumb"><img src="${thumbnail}" alt=""></div>` : '<div class="search-result-thumb placeholder"></div>'}
-              <div class="search-result-content">
-                <span class="search-result-cat">${catName}</span>
-                <h4 class="search-result-title">${title}</h4>
-              </div>
-            </a>
-          `;
+        postCards.forEach(card => {
+          const cardLink = card.querySelector('.post-card-title a').getAttribute('href');
+          if (matchedSlugs.includes(cardLink)) {
+            card.style.display = 'flex';
+            hasVisible = true;
+          } else {
+            card.style.display = 'none';
+          }
         });
-        
-        if(dropdownResults) dropdownResults.innerHTML = html;
-        
-      } catch (error) {
-        console.error('Error fetching search results:', error);
-        if(dropdownResults) dropdownResults.innerHTML = '<div class="search-empty">কিছু সমস্যা হয়েছে। আবার চেষ্টা করুন।</div>';
+
+        if (!hasVisible && noResults) {
+          noResults.style.display = 'block';
+        } else if (noResults) {
+          noResults.style.display = 'none';
+        }
+
+      } else {
+        // Show dropdown on non-homepage
+        if (dropdownResults) {
+          dropdownResults.style.display = 'block';
+          
+          if (matchedPosts.length === 0) {
+            dropdownResults.innerHTML = '<div class="search-empty">কোনো ফলাফল পাওয়া যায়নি</div>';
+            return;
+          }
+          
+          let html = '';
+          matchedPosts.forEach(post => {
+            const title = post.title.replace(new RegExp(query, 'gi'), match => `<mark>${match}</mark>`);
+            html += `
+              <a href="/posts/${post.slug}" class="search-result-item">
+                ${post.image ? `<div class="search-result-thumb"><img src="${post.image}" alt=""></div>` : '<div class="search-result-thumb"><svg style="width:100%;height:100%;color:rgba(255,255,255,0.3);transform:scale(0.5);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>'}
+                <div class="search-result-content">
+                  <span class="search-result-cat">${post.badge || post.category} • ${post.author}</span>
+                  <h4 class="search-result-title">${title}</h4>
+                </div>
+              </a>
+            `;
+          });
+          dropdownResults.innerHTML = html;
+        }
       }
     };
 
     searchInput.addEventListener('input', (e) => {
-      const query = e.target.value.trim();
-      
-      if (query.length > 0) {
-        searchClearBtn.style.display = 'block';
-      } else {
-        searchClearBtn.style.display = 'none';
-        if(dropdownResults) dropdownResults.style.display = 'none';
-      }
-
-      clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(() => {
-        performRestSearch(query);
-      }, 300);
-    });
-
-    // Submit standard search on Enter
-    searchInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        const query = searchInput.value.trim();
-        if (query) {
-          window.location.href = '/?s=' + encodeURIComponent(query);
-        }
-      }
+      performSearch(e.target.value);
     });
 
     searchClearBtn.addEventListener('click', () => {
       searchInput.value = '';
-      searchClearBtn.style.display = 'none';
-      if(dropdownResults) dropdownResults.style.display = 'none';
+      performSearch('');
       searchInput.focus();
     });
     
-    // Close dropdown on click outside
     document.addEventListener('click', (e) => {
       if (dropdownResults && !searchInput.contains(e.target) && !dropdownResults.contains(e.target) && !searchClearBtn.contains(e.target)) {
         dropdownResults.style.display = 'none';
@@ -246,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     searchInput.addEventListener('focus', () => {
       const query = searchInput.value.trim();
-      if (query.length > 0 && dropdownResults && dropdownResults.innerHTML !== '') {
+      if (query.length > 0 && dropdownResults && dropdownResults.innerHTML !== '' && !isHomePage) {
         dropdownResults.style.display = 'block';
       }
     });
