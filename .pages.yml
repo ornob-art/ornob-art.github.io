@@ -1,12 +1,12 @@
 media:
   input: public/images
   output: /images
+
 content:
   - name: posts
     label: Posts
     type: collection
     path: src/content/posts
-    format: frontmatter
     fields:
       - name: title
         label: Title
@@ -23,13 +23,14 @@ content:
       - name: category
         label: Category
         type: select
-        options:
-          - সাহিত্য
-          - কথাসাহিত্য
-          - বিজ্ঞান
-          - দর্শন
-          - ভ্রমণ
         required: true
+        options:
+          values:
+            - সাহিত্য
+            - কথাসাহিত্য
+            - বিজ্ঞান
+            - দর্শন
+            - ভ্রমণ
       - name: badge
         label: Badge
         type: string
