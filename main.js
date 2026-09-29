@@ -320,66 +320,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const postsGrid = document.getElementById('posts-grid');
     if (!postsGrid) return;
 
-    // AJAX Mode (WordPress)
-    if (typeof subornopotroAjax !== 'undefined') {
-      // Create skeleton loaders
-      postsGrid.innerHTML = Array(4).fill(0).map(() => `
-        <article class="post-card-skeleton skeleton-anim"></article>
-      `).join('');
-      
-      // Hide pagination during filtering
-      const pagination = document.querySelector('.posts-pagination') || document.querySelector('.pagination');
-      if (pagination) pagination.style.display = 'none';
-      if (featuredArticle) featuredArticle.style.display = (category === 'all') ? 'block' : 'none';
-      
-      const formData = new FormData();
-      formData.append('action', 'subornopotro_filter_posts');
-      formData.append('nonce', subornopotroAjax.nonce);
-      formData.append('category', category);
+    // DOM Mode (Static HTML/Astro)
+    let visibleCount = 0;
+    const allPostCards = postsGrid.querySelectorAll('.post-card');
 
-      fetch(subornopotroAjax.ajaxurl, {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.text())
-      .then(html => {
-        postsGrid.innerHTML = html;
-      })
-      .catch(error => {
-        console.error('Error fetching posts:', error);
-        postsGrid.innerHTML = '<p style="text-align:center;width:100%;">Failed to load posts. Please try again.</p>';
-      });
+    allPostCards.forEach(card => {
+      const cardCat = card.dataset.category;
+      card.classList.remove('fade-in');
       
-    } else {
-      // DOM Fallback Mode (Static HTML)
-      let visibleCount = 0;
-      const allPostCards = postsGrid.querySelectorAll('.post-card');
-
-      allPostCards.forEach(card => {
-        const cardCat = card.dataset.category;
-        card.classList.remove('fade-in');
-        
-        if (category === 'all' || cardCat === category) {
-          card.style.display = 'flex';
-          setTimeout(() => card.classList.add('fade-in'), 10);
-          visibleCount++;
-        } else {
-          card.style.display = 'none';
-        }
-      });
-
-      if (featuredArticle) {
-        featuredArticle.classList.remove('fade-in');
-        if (category === 'all' || featuredArticle.dataset.category === category) {
-          featuredArticle.style.display = 'block';
-          setTimeout(() => featuredArticle.classList.add('fade-in'), 10);
-        } else {
-          featuredArticle.style.display = 'none';
-        }
+      if (category === 'all' || cardCat === category) {
+        card.style.display = 'flex';
+        setTimeout(() => card.classList.add('fade-in'), 10);
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
       }
+    });
 
-      noResults.style.display = 'none';
+    if (featuredArticle) {
+      featuredArticle.classList.remove('fade-in');
+      if (category === 'all' || featuredArticle.dataset.category === category) {
+        featuredArticle.style.display = 'block';
+        setTimeout(() => featuredArticle.classList.add('fade-in'), 10);
+      } else {
+        featuredArticle.style.display = 'none';
+      }
     }
+
+    if (noResults) noResults.style.display = 'none';
   };
 
   // Attach click listeners to filter tabs
