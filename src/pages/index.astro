@@ -26,6 +26,16 @@ const toBengaliNumber = (num) => {
   const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
   return num?.toString().split('').map(d => banglaDigits[d] || d).join('');
 };
+
+// ইমেজ পাথ ঠিক করার ফাংশন (যেকোনো নামেই থাকুক না কেন তা খুঁজে বের করবে)
+const getPostImage = (post) => {
+  const rawImg = post?.data?.image || post?.data?.cover || post?.data?.coverImage;
+  if (!rawImg || typeof rawImg !== 'string') return null;
+  if (rawImg.startsWith('http') || rawImg.startsWith('/')) return rawImg;
+  return `/${rawImg}`;
+};
+
+const featuredImg = getPostImage(featuredPost);
 ---
 
 <Layout>
@@ -42,9 +52,12 @@ const toBengaliNumber = (num) => {
           <!-- Featured Lead Article (শীর্ষ রচনা) -->
           {featuredPost && (
           <article class="featured-article" id="featured-article" data-category={featuredPost.data.category}>
-            <div class="featured-banner">
-              <div class="featured-banner-pattern"></div>
-              <span class="featured-badge">
+            <div 
+              class="featured-banner" 
+              style={featuredImg ? `background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.65)), url('${featuredImg}'); background-size: cover; background-position: center; position: relative;` : 'position: relative;'}
+            >
+              {!featuredImg && <div class="featured-banner-pattern"></div>}
+              <span class="featured-badge" style="position: relative; z-index: 2;">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                 </svg>
@@ -97,14 +110,24 @@ const toBengaliNumber = (num) => {
             
             {regularPosts.map((post, index) => {
               const bgClass = `thumb-bg-${(index % 6) + 1}`;
+              const postImg = getPostImage(post);
               return (
               <article class="post-card" data-category={post.data.category} data-id={index + 1}>
-                <div class={`post-card-thumb ${bgClass}`}>
-                  <span class="post-card-badge">{post.data.badge}</span>
-                  <svg class="thumb-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                  </svg>
+                <div class={`post-card-thumb ${!postImg ? bgClass : ''}`} style="position: relative; overflow: hidden;">
+                  <span class="post-card-badge" style="position: relative; z-index: 2;">{post.data.badge}</span>
+                  {postImg ? (
+                    <img 
+                      src={postImg} 
+                      alt={post.data.title} 
+                      class="post-card-img" 
+                      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; display: block;" 
+                    />
+                  ) : (
+                    <svg class="thumb-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                  )}
                 </div>
                 <div class="post-card-body">
                   <h3 class="post-card-title">
