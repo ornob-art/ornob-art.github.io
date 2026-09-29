@@ -1,22 +1,95 @@
---- 
-// Header.astro
+---
+// src/components/Header.astro
 import { getCollection } from 'astro:content';
 const posts = await getCollection('posts');
 const searchData = posts.map(post => ({
   id: post.id,
   slug: post.slug,
-  title: post.data.title,
-  author: post.data.author,
-  category: post.data.category,
-  badge: post.data.badge,
-  excerpt: post.data.excerpt,
+  title: post.data.title || '',
+  author: post.data.author || '',
+  category: post.data.category || '',
+  badge: post.data.badge || '',
+  excerpt: post.data.excerpt || '',
   image: post.data.image || null
 }));
 ---
 
-<script is:inline define:vars={{ searchData }}>
-  window.SEARCH_DATA = searchData;
-</script>
+<style is:global>
+  .search-container {
+    position: relative;
+  }
+  .search-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #e8e2d5;
+    border-radius: 10px;
+    box-shadow: 0 10px 28px rgba(35, 25, 10, 0.15);
+    z-index: 9999;
+    max-height: 380px;
+    overflow-y: auto;
+  }
+  .search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f0ece2;
+    text-decoration: none;
+    color: #1e2022;
+    transition: background-color 0.2s ease;
+  }
+  .search-result-item:last-child {
+    border-bottom: none;
+  }
+  .search-result-item:hover {
+    background-color: #f2eee5;
+  }
+  .search-result-thumb {
+    width: 46px;
+    height: 46px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-right: 0.85rem;
+    flex-shrink: 0;
+    background: #1e293b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .search-result-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .search-result-content {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .search-result-cat {
+    font-size: 0.75rem;
+    color: #b47214;
+    font-weight: 600;
+    margin-bottom: 0.15rem;
+  }
+  .search-result-title {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: #1e2022;
+    margin: 0;
+  }
+  .search-empty {
+    padding: 1.25rem;
+    text-align: center;
+    color: #787f8a;
+    font-size: 0.9rem;
+  }
+</style>
+
 <!-- Top Metadata Bar -->
 <div class="top-bar">
   <div class="container">
@@ -66,7 +139,7 @@ const searchData = posts.map(post => ({
       </a>
 
       <!-- Search Box -->
-      <div class="search-container">
+      <div class="search-container" id="search-container">
         <div class="search-input-wrapper">
           <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="8"></circle>
@@ -78,6 +151,7 @@ const searchData = posts.map(post => ({
             id="search-input" 
             placeholder="লেখা খুঁজুন..." 
             aria-label="Search articles"
+            autocomplete="off"
           >
           <button class="search-clear-btn" id="search-clear-btn" aria-label="Clear search">✕</button>
         </div>
@@ -112,3 +186,139 @@ const searchData = posts.map(post => ({
     </div>
   </div>
 </header>
+
+<script is:inline define:vars={{ searchData }}>
+  window.SEARCH_DATA = searchData;
+
+  const initRealtimeSearch = () => {
+    const rawInput = document.getElementById('search-input');
+    const rawClearBtn = document.getElementById('search-clear-btn');
+    const searchContainer = document.getElementById('search-container');
+    const dropdownResults = document.getElementById('search-dropdown-results');
+
+    if (!rawInput || !rawClearBtn || !dropdownResults) return;
+
+    // পুরনো ক্যাশ হওয়া স্ক্রিপ্টের ইভেন্ট লিসেনার ও এরর মেসেজ সম্পূর্ণ মুছে ফেলা
+    const searchInput = rawInput.cloneNode(true);
+    rawInput.parentNode.replaceChild(searchInput, rawInput);
+
+    const searchClearBtn = rawClearBtn.cloneNode(true);
+    rawClearBtn.parentNode.replaceChild(searchClearBtn, rawClearBtn);
+
+    if (searchContainer) {
+      Array.from(searchContainer.children).forEach(child => {
+        if (!child.classList.contains('search-input-wrapper') && child.id !== 'search-dropdown-results') {
+          child.remove();
+        }
+      });
+    }
+
+    const resolveImg = (img) => {
+      if (!img || typeof img !== 'string') return null;
+      return (img.startsWith('http') || img.startsWith('/')) ? img : `/${img}`;
+    };
+
+    const runSearch = (rawQuery) => {
+      // যদি কোনো পুরনো স্ক্রিপ্ট এরর ডিভ তৈরি করে থাকে তা মুছে ফেলা
+      if (searchContainer) {
+        Array.from(searchContainer.children).forEach(child => {
+          if (!child.classList.contains('search-input-wrapper') && child.id !== 'search-dropdown-results') {
+            child.remove();
+          }
+        });
+      }
+
+      const query = (rawQuery || '').toLowerCase().trim();
+      const postCards = document.querySelectorAll('.post-card');
+      const featuredArticle = document.getElementById('featured-article');
+      const noResults = document.getElementById('no-results');
+
+      if (!query) {
+        searchClearBtn.style.display = 'none';
+        dropdownResults.style.display = 'none';
+        if (featuredArticle) featuredArticle.style.display = 'block';
+        postCards.forEach(card => card.style.display = 'flex');
+        if (noResults) noResults.style.display = 'none';
+        return;
+      }
+
+      searchClearBtn.style.display = 'block';
+      const allData = window.SEARCH_DATA || [];
+
+      const matchedPosts = allData.filter(post => {
+        return (post.title && post.title.toLowerCase().includes(query)) ||
+               (post.excerpt && post.excerpt.toLowerCase().includes(query)) ||
+               (post.author && post.author.toLowerCase().includes(query)) ||
+               (post.category && post.category.toLowerCase().includes(query)) ||
+               (post.badge && post.badge.toLowerCase().includes(query));
+      });
+
+      // ১. সব পেজেই সার্চ বক্সের নিচে তাৎক্ষণিক ড্রপডাউন ফলাফল দেখানো
+      dropdownResults.style.display = 'block';
+      if (matchedPosts.length === 0) {
+        dropdownResults.innerHTML = '<div class="search-empty">দুঃখিত, কোনো লেখা পাওয়া যায়নি</div>';
+      } else {
+        dropdownResults.innerHTML = matchedPosts.map(post => {
+          const imgPath = resolveImg(post.image);
+          return `
+            <a href="/posts/${post.slug}" class="search-result-item">
+              <div class="search-result-thumb">
+                ${imgPath ? `<img src="${imgPath}" alt="">` : '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>'}
+              </div>
+              <div class="search-result-content">
+                <span class="search-result-cat">${post.badge || post.category} • ${post.author}</span>
+                <h4 class="search-result-title">${post.title}</h4>
+              </div>
+            </a>
+          `;
+        }).join('');
+      }
+
+      // ২. হোমপেজে থাকলে নিচের কার্ডগুলোও রিয়েল-টাইমে ফিল্টার করা
+      if (postCards.length > 0 || featuredArticle) {
+        let hasVisible = false;
+
+        if (featuredArticle) {
+          const text = (featuredArticle.textContent || '').toLowerCase();
+          const isMatch = text.includes(query) || matchedPosts.some(p => featuredArticle.innerHTML.includes(p.title));
+          featuredArticle.style.display = isMatch ? 'block' : 'none';
+          if (isMatch) hasVisible = true;
+        }
+
+        postCards.forEach(card => {
+          const text = (card.textContent || '').toLowerCase();
+          const isMatch = text.includes(query) || matchedPosts.some(p => card.innerHTML.includes(p.title));
+          card.style.display = isMatch ? 'flex' : 'none';
+          if (isMatch) hasVisible = true;
+        });
+
+        if (noResults) {
+          noResults.style.display = hasVisible ? 'none' : 'block';
+        }
+      }
+    };
+
+    searchInput.addEventListener('input', (e) => runSearch(e.target.value));
+    searchInput.addEventListener('focus', (e) => {
+      if (e.target.value.trim()) runSearch(e.target.value);
+    });
+
+    searchClearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      runSearch('');
+      searchInput.focus();
+    });
+
+    document.addEventListener('click', (e) => {
+      if (searchContainer && !searchContainer.contains(e.target)) {
+        dropdownResults.style.display = 'none';
+      }
+    });
+  };
+
+  if (document.readyState === 'complete') {
+    setTimeout(initRealtimeSearch, 50);
+  } else {
+    window.addEventListener('load', () => setTimeout(initRealtimeSearch, 50));
+  }
+</script>
