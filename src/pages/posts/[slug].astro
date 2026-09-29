@@ -1,0 +1,222 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout>
+  <Header />
+
+  <!-- Main Content Area -->
+  <main class="site-main">
+    <div class="container">
+      
+      <!-- Breadcrumbs -->
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">প্রচ্ছদ</a>
+        <span class="breadcrumbs-sep">/</span>
+        <a href="/#articles">{post.data.category}</a>
+        <span class="breadcrumbs-sep">/</span>
+        <span>{post.data.title}</span>
+      </nav>
+
+      <div class="layout-grid">
+        
+        <!-- Left Column: Detailed Single Article Content -->
+        <div class="content-column">
+          
+          <article class="single-article">
+            
+            <!-- Article Header -->
+            <header class="single-header">
+              <span class="single-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+                {post.data.badge}
+              </span>
+
+              <h1 class="single-title">
+                {post.data.title}
+              </h1>
+
+              <div class="single-meta">
+                <div class="single-meta-left">
+                  <div class="single-avatar">{post.data.author.charAt(0)}</div>
+                  <div class="single-author-info">
+                    <h4>{post.data.author}</h4>
+                    <p>লেখক, সুবর্ণপত্র</p>
+                  </div>
+                </div>
+
+                <div class="single-meta-right">
+                  <div class="meta-pill">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                      <line x1="16" y1="2" x2="16" y2="6"></line>
+                      <line x1="8" y1="2" x2="8" y2="6"></line>
+                    </svg>
+                    <span>{post.data.date}</span>
+                  </div>
+                  <div class="meta-pill">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    <span>পড়ার সময়: {post.data.readTime}</span>
+                  </div>
+                  <div class="meta-pill">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <a href="#comments" style="color: inherit; text-decoration: none;">০টি মন্তব্য</a>
+                  </div>
+                </div>
+              </div>
+            </header>
+
+            {post.data.image && (
+            <div class="featured-image-container">
+              <div class="featured-image-frame" role="img" aria-label="প্রচ্ছদ চিত্র">
+                <div class="featured-image-pattern" style={`background-image: url(${post.data.image}); background-size: cover; background-position: center;`}></div>
+              </div>
+            </div>
+            )}
+            {!post.data.image && (
+            <div class="featured-image-container">
+              <div class="featured-image-frame" role="img" aria-label="প্রচ্ছদ চিত্র">
+                <div class="featured-image-pattern"></div>
+                <div class="featured-image-icon">
+                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m18 2-7.5 7.5"></path>
+                    <path d="m22 7-7.5 7.5"></path>
+                    <path d="m2 22 5.5-1.5L21.3 6.7a2.83 2.83 0 0 0-4-4L3.5 16.5 2 22z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            )}
+
+            <div class="single-content">
+              <Content />
+            </div>
+
+            <div class="article-footer-toolbar">
+              <div class="article-tags">
+                <span class="tag-label">ট্যাগসমূহ:</span>
+                <a href="/#articles" class="article-tag">#{post.data.category}</a>
+              </div>
+
+              <div class="share-bar">
+                <span class="share-label">শেয়ার করুন:</span>
+                <button class="share-btn" onclick="shareArticle('facebook')" aria-label="Share on Facebook">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                  </svg>
+                </button>
+                <button class="share-btn" onclick="shareArticle('twitter')" aria-label="Share on Twitter">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                  </svg>
+                </button>
+                <button class="share-btn" onclick="copyArticleLink()" aria-label="Copy Link" id="copy-link-btn" title="লিঙ্ক কপি করুন">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="author-box">
+              <div class="author-box-avatar">{post.data.author.charAt(0)}</div>
+              <div class="author-box-info">
+                <h4>{post.data.author}</h4>
+                <p class="author-box-title">লেখক, সুবর্ণপত্র</p>
+                <p class="author-box-bio">
+                  সুবর্ণপত্রের একজন নিয়মিত লেখক ও অবদানকারী।
+                </p>
+              </div>
+            </div>
+
+          </article>
+
+          <section class="comments-section" id="comments">
+            <div class="comments-head">
+              <h3 class="comments-title">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                পাঠকদের মন্তব্য
+              </h3>
+              <span class="comments-count-badge" id="comment-count-badge">০টি মন্তব্য</span>
+            </div>
+
+            <div class="comment-form-container">
+              <h4 class="comment-form-title">আপনার মন্তব্য প্রকাশ করুন</h4>
+              <p class="comment-form-desc">আপনার মতামত আমাদের লেখক ও পাঠকদের অনুপ্রাণিত করে। অনুগ্রহ করে শালীন ও প্রাসঙ্গিক মন্তব্য করুন।</p>
+              
+              <form class="comment-form" id="comment-form">
+                <div class="comment-form-row">
+                  <div class="comment-input-group">
+                    <label for="comment-author-input" class="comment-label">আপনার পূর্ণ নাম *</label>
+                    <input type="text" id="comment-author-input" class="comment-input" placeholder="যেমন: আহমদ শফিক" required>
+                  </div>
+                  <div class="comment-input-group">
+                    <label for="comment-email-input" class="comment-label">ইমেইল ঠিকানা (প্রকাশিত হবে না) *</label>
+                    <input type="email" id="comment-email-input" class="comment-input" placeholder="name@example.com" required>
+                  </div>
+                </div>
+                <div class="comment-input-group">
+                  <label for="comment-text-input" class="comment-label">আপনার সুচিন্তিত মন্তব্য লিখুন *</label>
+                  <textarea id="comment-text-input" class="comment-textarea" placeholder="প্রবন্ধটি সম্পর্কে আপনার ভাবনা বা প্রতিক্রিয়া ব্যক্ত করুন..." required></textarea>
+                </div>
+                <button type="submit" class="comment-submit-btn" id="comment-submit-btn">
+                  <span>মন্তব্য প্রকাশ করুন</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                </button>
+              </form>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- Right Column: Sidebar (সূচীপত্র ও অনুষঙ্গ) -->
+        <aside class="sidebar" aria-label="সূচীপত্র ও অনুষঙ্গ">
+          <div class="widget newsletter-widget" id="newsletter">
+            <h3 class="widget-title">
+              <span>পত্রিকা গ্রাহক হন</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+            </h3>
+            <p class="newsletter-desc">প্রতি শুক্রবার নতুন সংখ্যা ও নির্বাচিত প্রবন্ধ আপনার ইমেইল ইনবক্সে পেতে বিনামূল্যে যুক্ত থাকুন।</p>
+            <form class="newsletter-form" id="newsletter-form">
+              <input type="email" class="newsletter-input" placeholder="আপনার ইমেইল ঠিকানা..." required>
+              <button type="submit" class="newsletter-btn">গ্রাহক হোন</button>
+            </form>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
