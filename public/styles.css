@@ -60,6 +60,8 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -70,6 +72,18 @@ body {
   -webkit-font-smoothing: antialiased;
   position: relative;
   min-height: 100vh;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Fix grid overflows */
+.layout-grid > *,
+.posts-grid > *,
+.content-column,
+.sidebar,
+.single-article {
+  min-width: 0;
+  max-width: 100%;
 }
 
 /* Container */
@@ -1305,7 +1319,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.55rem;
+  gap: 0.5rem 0.65rem;
 }
 
 .meta-author {
@@ -1333,9 +1347,12 @@ body {
 }
 
 /* Featured Image */
-.single-featured-img {
+.single-featured-img,
+.single-content img {
   width: 100%;
+  max-width: 100%;
   height: auto;
+  object-fit: cover;
   display: block;
   border-radius: 12px;
   margin-bottom: 2.5rem;
@@ -2062,28 +2079,33 @@ body {
 @media (max-width: 768px) {
   /* 1. Hamburger Menu Position */
   .header-main {
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    gap: 0.85rem;
   }
   
   .brand {
     order: 1;
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   .hamburger {
-    display: block; /* Show hamburger in mobile */
+    display: flex;
     order: 2;
-    border: none; /* Clean 3 parallel lines */
-    padding: 0.5rem 0;
-    background: transparent;
+    border: none;
+    background: none;
+    padding: 0.4rem;
   }
 
   .search-container {
     order: 3;
-    width: 100%;
     flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
     margin-top: 1rem;
   }
 
@@ -2113,12 +2135,14 @@ body {
   }
   
   /* 3. Top bar alignment */
-  .top-bar .container {
+  .top-bar .container,
+  .top-bar .top-meta {
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    gap: 0.45rem;
+    gap: 0.35rem;
     padding: 0.65rem 0;
   }
 }
