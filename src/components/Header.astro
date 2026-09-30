@@ -316,9 +316,37 @@ const searchData = posts.map(post => ({
     });
   };
 
+  const initMobileMenu = () => {
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const navMenu = document.getElementById('nav-menu');
+    
+    if (hamburgerBtn && navMenu) {
+      hamburgerBtn.addEventListener('click', () => {
+        const isExpanded = hamburgerBtn.getAttribute('aria-expanded') === 'true';
+        hamburgerBtn.setAttribute('aria-expanded', !isExpanded);
+        navMenu.classList.toggle('active');
+        hamburgerBtn.classList.toggle('active');
+      });
+
+      // Close menu automatically on link click
+      const navLinks = navMenu.querySelectorAll('a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          hamburgerBtn.setAttribute('aria-expanded', 'false');
+          navMenu.classList.remove('active');
+          hamburgerBtn.classList.remove('active');
+        });
+      });
+    }
+  };
+
   if (document.readyState === 'complete') {
     setTimeout(initRealtimeSearch, 50);
+    setTimeout(initMobileMenu, 50);
   } else {
-    window.addEventListener('load', () => setTimeout(initRealtimeSearch, 50));
+    window.addEventListener('load', () => {
+      setTimeout(initRealtimeSearch, 50);
+      setTimeout(initMobileMenu, 50);
+    });
   }
 </script>
