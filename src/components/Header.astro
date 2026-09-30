@@ -1,6 +1,8 @@
 ---
 // src/components/Header.astro
 import { getCollection } from 'astro:content';
+import { getAutoBadge, getAutoExcerpt } from '../utils';
+
 const posts = await getCollection('posts');
 const searchData = posts.map(post => ({
   id: post.id,
@@ -8,8 +10,8 @@ const searchData = posts.map(post => ({
   title: post.data.title || '',
   author: post.data.author || '',
   category: post.data.category || '',
-  badge: post.data.badge || '',
-  excerpt: post.data.excerpt || '',
+  badge: getAutoBadge(post),
+  excerpt: getAutoExcerpt(post),
   image: post.data.image || null
 }));
 ---
