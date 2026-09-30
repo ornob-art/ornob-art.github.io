@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { getCollection } from 'astro:content';
+import { getAutoDate, getAutoReadTime, getAutoExcerpt, getAutoBadge } from '../utils';
 
 const allPosts = await getCollection('posts');
 const featuredPost = allPosts.find(post => post.data.featured) || allPosts[0];
@@ -61,7 +62,7 @@ const featuredImg = getPostImage(featuredPost);
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                 </svg>
-                {featuredPost.data.badge}
+                {getAutoBadge(featuredPost)}
               </span>
             </div>
             
@@ -70,7 +71,7 @@ const featuredImg = getPostImage(featuredPost);
                 <a href={`/posts/${featuredPost.slug}`} style="color: inherit; text-decoration: none;">{featuredPost.data.title}</a>
               </h2>
               <p class="featured-excerpt">
-                {featuredPost.data.excerpt}
+                {getAutoExcerpt(featuredPost)}
               </p>
               
               <div class="article-meta">
@@ -78,7 +79,7 @@ const featuredImg = getPostImage(featuredPost);
                   <div class="author-avatar">{featuredPost.data.author.charAt(0)}</div>
                   <div class="author-details">
                     <span class="author-name">{featuredPost.data.author}</span>
-                    <span class="post-date">{featuredPost.data.date} • পড়ার সময়: {featuredPost.data.readTime}</span>
+                    <span class="post-date">{getAutoDate(featuredPost)} • পড়ার সময়: {getAutoReadTime(featuredPost)}</span>
                   </div>
                 </div>
                 <a href={`/posts/${featuredPost.slug}`} class="read-more-btn" aria-label="সম্পূর্ণ রচনা পড়ুন" style="text-decoration: none;">
@@ -114,7 +115,7 @@ const featuredImg = getPostImage(featuredPost);
               return (
               <article class="post-card" data-category={post.data.category} data-id={index + 1}>
                 <div class={`post-card-thumb ${!postImg ? bgClass : ''}`} style="position: relative; overflow: hidden;">
-                  <span class="post-card-badge" style="position: relative; z-index: 2;">{post.data.badge}</span>
+                  <span class="post-card-badge" style="position: relative; z-index: 2;">{getAutoBadge(post)}</span>
                   {postImg ? (
                     <img 
                       src={postImg} 
@@ -134,11 +135,11 @@ const featuredImg = getPostImage(featuredPost);
                     <a href={`/posts/${post.slug}`} style="color: inherit; text-decoration: none;">{post.data.title}</a>
                   </h3>
                   <p class="post-card-excerpt">
-                    {post.data.excerpt}
+                    {getAutoExcerpt(post)}
                   </p>
                   <div class="post-card-footer">
                     <div class="post-card-author">
-                      <span>{post.data.author}</span> • <span>{post.data.date.split(',')[0]}</span>
+                      <span>{post.data.author}</span> • <span>{getAutoDate(post).split(',')[0]}</span>
                     </div>
                     <a href={`/posts/${post.slug}`} class="post-btn-link" style="text-decoration: none;">
                       <span>পড়ুন</span> →
