@@ -2149,3 +2149,60 @@ body {
   color: #ffffff;
   transform: translateY(-3px);
 }
+
+/* ==========================================================================
+   Mobile Header & Navigation Updates
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* 1. Hamburger Menu Position */
+  .header-main {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .brand {
+    order: 1;
+  }
+
+  .hamburger {
+    display: block; /* Show hamburger in mobile */
+    order: 2;
+    border: none; /* Clean 3 parallel lines */
+    padding: 0.5rem 0;
+    background: transparent;
+  }
+
+  .search-container {
+    order: 3;
+    width: 100%;
+    flex: 0 0 100%;
+    margin-top: 1rem;
+  }
+
+  /* 2. Navigation Menu Toggle & Smooth Animation */
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+    padding: 0;
+  }
+  
+  .nav-menu.active {
+    max-height: 400px;
+    opacity: 1;
+    padding: 1rem 0;
+  }
+  
+  .nav-link {
+    display: block;
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius-sm);
+  }
+}
