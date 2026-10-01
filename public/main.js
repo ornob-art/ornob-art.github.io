@@ -1,4 +1,4 @@
-/**
+﻿/**
  * সুবর্ণপত্র (Subornopotro) - Interactive Blog Engine
  * Search, Category Filtering, Modal Reader, Mobile Drawer
  */
@@ -480,70 +480,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ==========================================================================
-     6. Single Post: Comments Submission & Reply
-     ========================================================================== */
-  const commentForm = document.getElementById('comment-form');
-  const commentList = document.getElementById('comment-list');
-  const commentCountBadge = document.getElementById('comment-count-badge');
-
-  if (commentForm && commentList) {
-    commentForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const authorInput = document.getElementById('comment-author-input');
-      const emailInput = document.getElementById('comment-email-input');
-      const textInput = document.getElementById('comment-text-input');
-
-      const authorName = authorInput.value.trim();
-      const commentText = textInput.value.trim();
-
-      if (!authorName || !commentText) return;
-
-      const firstLetter = authorName.charAt(0);
-      const newComment = document.createElement('li');
-      newComment.className = 'comment-item';
-
-      newComment.innerHTML = `
-        <div class="comment-avatar">${firstLetter}</div>
-        <div class="comment-content">
-          <div class="comment-header">
-            <span class="comment-author-name">${authorName}</span>
-            <span class="comment-date">এইমাত্র • ১৫ সেপ্টেম্বর, ২০২৬</span>
-          </div>
-          <p class="comment-body">${commentText}</p>
-          <button class="comment-reply-btn" onclick="replyToComment('${authorName}')">উত্তর দিন</button>
-        </div>
-      `;
-
-      commentList.appendChild(newComment);
-
-      // Update count badge
-      const currentItems = commentList.querySelectorAll('.comment-item').length;
-      const bengaliNumbers = {'1':'১', '2':'২', '3':'৩', '4':'৪', '5':'৫', '6':'৬', '7':'৭', '8':'৮', '9':'৯', '0':'০'};
-      const bnCount = String(currentItems).split('').map(d => bengaliNumbers[d] || d).join('');
-      if (commentCountBadge) {
-        commentCountBadge.textContent = `${bnCount}টি মন্তব্য`;
-      }
-
-      alert('ধন্যবাদ! আপনার সুচিন্তিত মন্তব্যটি সফলভাবে প্রকাশিত হয়েছে।');
-
-      commentForm.reset();
-
-      // Smooth scroll to the new comment
-      newComment.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    });
-  }
-
-  // Reply Helper
-  window.replyToComment = (name) => {
-    const textInput = document.getElementById('comment-text-input');
-    if (textInput) {
-      textInput.value = `@${name}: `;
-      textInput.focus();
-    }
-  };
-
   // Share and Copy Link Helpers
   window.copyArticleLink = () => {
     navigator.clipboard.writeText(window.location.href).then(() => {
@@ -629,3 +565,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
