@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getCollection } from 'astro:content';
-import { getAutoDate, getAutoReadTime, getAutoBadge, toBengaliDigits } from '../../utils';
+import { getAutoDate, getAutoReadTime, getAutoBadge, toBengaliDigits, getPostViews } from '../../utils';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -21,6 +21,24 @@ const wordCountBn = toBengaliDigits(wordCountNum);
 const readTimeBn = getAutoReadTime(post);
 const postDate = getAutoDate(post);
 const postBadge = getAutoBadge(post);
+const allPosts = await getCollection('posts');
+const popularPosts = [...allPosts]
+  .sort((a, b) => getPostViews(b) - getPostViews(a))
+  .slice(0, 4);
+
+const categoryCounts = allPosts.reduce((acc, p) => {
+  const cat = p.data.category;
+  acc[cat] = (acc[cat] || 0) + 1;
+  return acc;
+}, {});
+
+const categories = [
+  { id: 'সাহিত্য', label: 'সাহিত্য ও কাব্য' },
+  { id: 'কথাসাহিত্য', label: 'কথাসাহিত্য ও গল্প' },
+  { id: 'দর্শন', label: 'দর্শন ও সমাজভাবনা' },
+  { id: 'বিজ্ঞান', label: 'বিজ্ঞান ও প্রযুক্তি' },
+  { id: 'ভ্রমণ', label: 'ভ্রমণ ও ঐতিহ্য' },
+];
 ---
 
 <Layout>
@@ -146,7 +164,95 @@ const postBadge = getAutoBadge(post);
         <!-- Right Column: Sidebar (সূচীপত্র ও অনুষঙ্গ) -->
         <aside class="sidebar" aria-label="সূচীপত্র ও অনুষঙ্গ">
           
+          <!-- Table of Contents / Categories (সূচীপত্র / বিষয়শ্রেণী) -->
+          <div class="widget">
+            <h3 class="widget-title">
+              <span>সূচীপত্র / বিষয়শ্রেণী</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+            </h3>
+            <ul class="toc-list" id="toc-list">
+              <li>
+                <button class="toc-item-link active" data-category="all">
+                  <span class="toc-item-title">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                    সমগ্র রচনাসমগ্র
+                  </span>
+                  <span class="toc-item-count">{toBengaliDigits(allPosts.length)}টি</span>
+                </button>
+              </li>
+              {categories.map(cat => (
+                <li>
+                  <button class="toc-item-link" data-category={cat.id}>
+                    <span class="toc-item-title">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                      </svg>
+                      {cat.label}
+                    </span>
+                    <span class="toc-item-count">{toBengaliDigits(categoryCounts[cat.id] || 0)}টি</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Popular / Trending Articles (জনপ্রিয় লেখা) -->
+          <div class="widget">
+            <h3 class="widget-title">
+              <span style="display: flex; align-items: center; gap: 0.4rem;">
+                জনপ্রিয় লেখা 
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="url(#fireGradient)" stroke="none">
+                  <defs>
+                    <linearGradient id="fireGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                      <stop offset="0%" stop-color="#ea580c"/>
+                      <stop offset="50%" stop-color="#f97316"/>
+                      <stop offset="100%" stop-color="#fbbf24"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+                </svg>
+              </span>
+            </h3>
+            <ul class="popular-list">
+              {popularPosts.map((popPost, idx) => (
+                <li class="popular-item" onclick={`window.location.href='/posts/${popPost.slug}'`}>
+                  <span class="popular-rank">{toBengaliDigits(idx + 1)}</span>
+                  <div>
+                    <h4 class="popular-item-title">{popPost.data.title}</h4>
+                    <span class="popular-item-date">পঠিত: {toBengaliDigits(getPostViews(popPost))} বার</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Weekly Literary Thought (সপ্তাহের সাহিত্য ভাবনা) -->
+          <div class="widget quote-widget">
+            <h3 class="widget-title">
+              <span>সপ্তাহের ভাবনা</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
+                <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
+              </svg>
+            </h3>
+            <blockquote class="quote-body">
+              “আলো যেমন আঁধারকে স্পর্শ করেই প্রকাশ পায়, তেমনি দুঃখের নিবিড় অনুভূতিই আনন্দের প্রকৃত স্বরূপকে চিনিয়ে দেয়।”
+            </blockquote>
+            <p class="quote-author">— রবীন্দ্রনাথ ঠাকুর</p>
+          </div>
+
+          
         </aside>
+
 
       </div>
     </div>
@@ -154,6 +260,7 @@ const postBadge = getAutoBadge(post);
 
   <Footer />
 </Layout>
+
 
 
 
