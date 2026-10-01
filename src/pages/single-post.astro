@@ -169,16 +169,17 @@ import Footer from '../components/Footer.astro';
             </div>
 
             <!-- Post Navigation (Previous / Next) -->
-            <nav class="post-nav" aria-label="Post Navigation">
-              <a href="/single-post" class="post-nav-card">
-                <span class="post-nav-direction">← পূর্ববর্তী রচনা</span>
-                <span class="post-nav-title">রবীন্দ্রনাথের শেষ পর্বের কবিতা: রূপান্তরের আলো ও ছায়া</span>
+            <div class="post-navigation">
+              <a href="/single-post" class="nav-card nav-prev">
+                <span class="nav-label">← পূর্ববর্তী রচনা</span>
+                <span class="nav-title">রবীন্দ্রনাথের শেষ পর্বের কবিতা: রূপান্তরের আলো ও ছায়া</span>
               </a>
-              <a href="/single-post" class="post-nav-card" style="text-align: right;">
-                <span class="post-nav-direction" style="justify-content: flex-end;">পরবর্তী রচনা →</span>
-                <span class="post-nav-title">মেঘভাঙা রোদ এবং একটি হলুদ খামের গল্প</span>
+              
+              <a href="/single-post" class="nav-card nav-next">
+                <span class="nav-label">পরবর্তী রচনা →</span>
+                <span class="nav-title">মেঘভাঙা রোদ এবং একটি হলুদ খামের গল্প</span>
               </a>
-            </nav>
+            </div>
 
           </article>
 
