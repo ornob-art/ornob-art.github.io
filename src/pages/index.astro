@@ -1,4 +1,4 @@
-﻿---
+---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -231,7 +231,7 @@ const featuredImg = getPostImage(featuredPost);
             </h3>
             <ul class="popular-list">
               {popularPosts.map((popPost, idx) => (
-                <li class="popular-item" onclick={window.location.href='/posts/$'}>
+                <li class="popular-item" onclick={`window.location.href='/posts/${popPost.slug}'`}>
                   <span class="popular-rank">{toBengaliNumber(idx + 1)}</span>
                   <div>
                     <h4 class="popular-item-title">{popPost.data.title}</h4>
