@@ -1361,6 +1361,7 @@ body {
 
 /* Detailed Article Content */
 .single-content {
+  font-family: var(--font-serif);
   font-size: 1.12rem;
   line-height: 2.1;
   color: #2c3036;
