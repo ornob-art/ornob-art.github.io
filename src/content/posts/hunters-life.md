@@ -3,7 +3,7 @@ title: শিকারী জীবন
 author: কাল্পনিক অরণ্য
 date: ১৬ সেপ্টেম্বর, ২০২৬
 category: বিজ্ঞান
-badge: বিজ্ঞান ও দর্শন
+badge: বিজ্ঞান
 featured: false
 image: /images/hunters-life.jpg
 excerpt: "মানুষ এক জায়গায় মাসের পর মাস থাকতে পারত না। আশেপাশের জঙ্গলের ফলমূল
