@@ -119,7 +119,7 @@ const featuredImg = getPostImage(featuredPost);
               return (
               <article class="post-card" data-category={post.data.category} data-id={index + 1}>
                 <div class={`post-card-thumb ${!postImg ? bgClass : ''}`} style="position: relative; overflow: hidden;">
-                  <span class="post-card-badge" style="position: relative; z-index: 2;">{getAutoBadge(post)}</span>
+                  <span class="post-card-badge" style="z-index: 2;">{getAutoBadge(post)}</span>
                   {postImg ? (
                     <img 
                       src={postImg} 
