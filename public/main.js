@@ -1,4 +1,4 @@
-﻿/**
+/**
  * সুবর্ণপত্র (Subornopotro) - Interactive Blog Engine
  * Search, Category Filtering, Modal Reader, Mobile Drawer
  */
@@ -566,8 +566,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-
-  
 /* ==========================================================================
    View Counter Logic (Local Simulation)
    ========================================================================== */
@@ -602,20 +600,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const viewKey = `views_${slug}`;
         const localViews = parseInt(localStorage.getItem(viewKey) || '0', 10);
         
-        if (localViews > 0) {
-          const dateSpan = item.querySelector('.popular-item-date');
-          if (dateSpan && !item.hasAttribute('data-base-views-added')) {
-            const text = dateSpan.textContent;
-            const bnDigitsMatch = text.match(/[০-৯,]+/);
-            if (bnDigitsMatch) {
-              const cleanedText = bnDigitsMatch[0].replace(/,/g, '');
-              const baseViews = parseBn(cleanedText);
-              const totalViews = baseViews + localViews;
-              dateSpan.textContent = `পঠিত: ${toBn(totalViews)} বার`;
-            }
-            item.setAttribute('data-base-views-added', 'true');
-          }
-        }
       }
     }
   });
