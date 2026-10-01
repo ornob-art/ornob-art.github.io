@@ -3,7 +3,6 @@ title: সুপারনোভা
 author: কাল্পনিক অরণ্য
 date: ০১ সেপ্টেম্বর, ২০২৬
 category: বিজ্ঞান
-badge: বিজ্ঞান
 featured: false
 image: /images/image-supernova.jpg
 excerpt: সুপারনোভা হলো মহাকাশের সবচেয়ে ভয়ংকর এবং উজ্জ্বলতম নক্ষত্র বিস্ফোরণ,
