@@ -1,4 +1,4 @@
-export const toBengaliDigits = (numStr: string | number) => {
+﻿export const toBengaliDigits = (numStr: string | number) => {
   const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
   return numStr.toString().replace(/\d/g, d => banglaDigits[parseInt(d)]);
 };
@@ -37,4 +37,13 @@ export const getAutoExcerpt = (post: any) => {
 export const getAutoBadge = (post: any) => {
   if (post.data.badge) return post.data.badge;
   return post.data.category;
+};
+
+export const getPostViews = (post: any) => {
+  let hash = 0;
+  for (let i = 0; i < post.slug.length; i++) {
+    hash = post.slug.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const views = Math.abs(hash % 4000) + 1500;
+  return views;
 };
