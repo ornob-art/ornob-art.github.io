@@ -134,56 +134,13 @@ const postBadge = getAutoBadge(post);
               <div class="author-box-avatar">{post.data.author.charAt(0)}</div>
               <div class="author-box-info">
                 <h4>{post.data.author}</h4>
-                <p class="author-box-title">লেখক, সুবর্ণপত্র</p>
+                <p class="author-box-title">লেখক, সুবর্ণপত্রিকা</p>
                 <p class="author-box-bio">
-                  সুবর্ণপত্রের একজন নিয়মিত লেখক ও অবদানকারী।
+                  সুবর্ণপত্রিকার নিয়মিত লেখক হিসেবে সাহিত্য ও সমাজভাবনা বিষয়ে প্রবন্ধ লেখেন।
                 </p>
               </div>
             </div>
-
           </article>
-
-          <section class="comments-section" id="comments">
-            <div class="comments-head">
-              <h3 class="comments-title">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                </svg>
-                পাঠকদের মন্তব্য
-              </h3>
-              <span class="comments-count-badge" id="comment-count-badge">০টি মন্তব্য</span>
-            </div>
-
-            <div class="comment-form-container">
-              <h4 class="comment-form-title">আপনার মন্তব্য প্রকাশ করুন</h4>
-              <p class="comment-form-desc">আপনার মতামত আমাদের লেখক ও পাঠকদের অনুপ্রাণিত করে। অনুগ্রহ করে শালীন ও প্রাসঙ্গিক মন্তব্য করুন।</p>
-              
-              <form class="comment-form" id="comment-form">
-                <div class="comment-form-row">
-                  <div class="comment-input-group">
-                    <label for="comment-author-input" class="comment-label">আপনার পূর্ণ নাম *</label>
-                    <input type="text" id="comment-author-input" class="comment-input" placeholder="যেমন: আহমদ শফিক" required>
-                  </div>
-                  <div class="comment-input-group">
-                    <label for="comment-email-input" class="comment-label">ইমেইল ঠিকানা (প্রকাশিত হবে না) *</label>
-                    <input type="email" id="comment-email-input" class="comment-input" placeholder="name@example.com" required>
-                  </div>
-                </div>
-                <div class="comment-input-group">
-                  <label for="comment-text-input" class="comment-label">আপনার সুচিন্তিত মন্তব্য লিখুন *</label>
-                  <textarea id="comment-text-input" class="comment-textarea" placeholder="প্রবন্ধটি সম্পর্কে আপনার ভাবনা বা প্রতিক্রিয়া ব্যক্ত করুন..." required></textarea>
-                </div>
-                <button type="submit" class="comment-submit-btn" id="comment-submit-btn">
-                  <span>মন্তব্য প্রকাশ করুন</span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="22" y1="2" x2="11" y2="13"></line>
-                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                  </svg>
-                </button>
-              </form>
-            </div>
-          </section>
-
         </div>
 
         <!-- Right Column: Sidebar (সূচীপত্র ও অনুষঙ্গ) -->
@@ -210,3 +167,5 @@ const postBadge = getAutoBadge(post);
 
   <Footer />
 </Layout>
+
+
