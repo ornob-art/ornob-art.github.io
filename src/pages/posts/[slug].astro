@@ -7,13 +7,17 @@ import { getAutoDate, getAutoReadTime, getAutoBadge, toBengaliDigits, getPostVie
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
-  return posts.map(post => ({
+  return posts.map((post, index) => ({
     params: { slug: post.slug },
-    props: { post },
+    props: { 
+      post,
+      prevPost: index > 0 ? posts[index - 1] : null,
+      nextPost: index < posts.length - 1 ? posts[index + 1] : null,
+    },
   }));
 }
 
-const { post } = Astro.props;
+const { post, prevPost, nextPost } = Astro.props;
 const { Content } = await post.render();
 
 const wordCountNum = (post.body || '').trim().split(/\s+/).length;
@@ -157,6 +161,22 @@ const categories = [
                   সুবর্ণপত্রিকার নিয়মিত লেখক হিসেবে সাহিত্য ও সমাজভাবনা বিষয়ে প্রবন্ধ লেখেন।
                 </p>
               </div>
+            </div>
+
+            <div class="post-navigation">
+              {prevPost ? (
+                <a href={`/posts/${prevPost.slug}`} class="nav-card nav-prev">
+                  <span class="nav-label">← পূর্ববর্তী রচনা</span>
+                  <span class="nav-title">{prevPost.data.title}</span>
+                </a>
+              ) : <div class="nav-card empty-nav"></div>}
+              
+              {nextPost ? (
+                <a href={`/posts/${nextPost.slug}`} class="nav-card nav-next">
+                  <span class="nav-label">পরবর্তী রচনা →</span>
+                  <span class="nav-title">{nextPost.data.title}</span>
+                </a>
+              ) : <div class="nav-card empty-nav"></div>}
             </div>
           </article>
         </div>
