@@ -228,7 +228,7 @@ const categories = [
                   <span class="popular-rank">{toBengaliDigits(idx + 1)}</span>
                   <div>
                     <h4 class="popular-item-title">{popPost.data.title}</h4>
-                    <span class="popular-item-date">পঠিত: {toBengaliDigits(getPostViews(popPost))} বার</span>
+                    <span class="popular-item-date">{getAutoDate(popPost)}</span>
                   </div>
                 </li>
               ))}
