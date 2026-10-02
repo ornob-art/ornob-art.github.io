@@ -31,8 +31,7 @@ import Footer from '../components/Footer.astro';
             <input type="text" name="_honey" style="display:none">
             <!-- Disable Captcha (Optional, for better UX) -->
             <input type="hidden" name="_captcha" value="false">
-            <!-- Success Page (Optional, currently reloads to same page) -->
-            <input type="hidden" name="_next" value={Astro.url.href}>
+            <!-- Success Page (Optional, currently using FormSubmit default) -->
 
             <div class="form-row">
               <div class="form-group">
