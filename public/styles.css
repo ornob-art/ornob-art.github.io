@@ -2215,3 +2215,11 @@ body {
     gap: 1rem;
   }
 }
+
+/* Pagination Styles */
+.pagination-container { display: flex; flex-wrap: wrap; }
+.page-btn { padding: 0.5rem 1rem; border: 1px solid var(--border-light); background: var(--bg-card); color: var(--text-main); cursor: pointer; border-radius: 4px; font-family: var(--font-sans); transition: all 0.3s ease; }
+.page-btn:hover { border-color: var(--color-gold); color: var(--color-gold); }
+.page-btn.active { background: var(--color-gold); color: white; border-color: var(--color-gold); }
+.page-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.page-dots { padding: 0.5rem; color: var(--text-muted); }

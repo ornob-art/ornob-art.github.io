@@ -339,22 +339,80 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       
     } else {
-      // DOM Fallback Mode (Static HTML)
-      let visibleCount = 0;
+      // DOM Fallback Mode (Static HTML) with Client-side Pagination
       const allPostCards = postsGrid.querySelectorAll('.post-card');
+      const postsPerPage = 10;
+      let filteredCards = [];
 
       allPostCards.forEach(card => {
         const cardCat = card.dataset.category;
         card.classList.remove('fade-in');
+        card.style.display = 'none'; // hide all initially
         
         if (category === 'all' || cardCat === category) {
-          card.style.display = 'flex';
-          setTimeout(() => card.classList.add('fade-in'), 10);
-          visibleCount++;
-        } else {
-          card.style.display = 'none';
+          filteredCards.push(card);
         }
       });
+
+      // Pagination Renderer
+      window.renderPage = (page) => {
+        const totalPages = Math.ceil(filteredCards.length / postsPerPage);
+        if (page < 1) page = 1;
+        if (page > totalPages) page = totalPages;
+        
+        // Hide all first
+        filteredCards.forEach(c => c.style.display = 'none');
+        
+        const start = (page - 1) * postsPerPage;
+        const end = start + postsPerPage;
+        const cardsToShow = filteredCards.slice(start, end);
+        
+        let visibleCount = 0;
+        cardsToShow.forEach(card => {
+          card.style.display = 'flex';
+          setTimeout(() => card.classList.add('fade-in'), 10 + (visibleCount * 50));
+          visibleCount++;
+        });
+
+        // Render Pagination UI
+        const container = document.getElementById('pagination-container');
+        if (container) {
+          if (totalPages <= 1) {
+            container.style.display = 'none';
+          } else {
+            container.style.display = 'flex';
+            let html = '';
+            
+            // Prev Button
+            if (page > 1) {
+              html += `<button class="page-btn" onclick="renderPage(${page - 1}); scrollToArticles();">← পূর্ববর্তী</button>`;
+            } else {
+              html += `<button class="page-btn" disabled>← পূর্ববর্তী</button>`;
+            }
+            
+            // Page Numbers
+            for (let i = 1; i <= totalPages; i++) {
+              if (i === 1 || i === totalPages || (i >= page - 1 && i <= page + 1)) {
+                html += `<button class="page-btn ${i === page ? 'active' : ''}" onclick="renderPage(${i}); scrollToArticles();">${i}</button>`;
+              } else if (i === page - 2 || i === page + 2) {
+                html += `<span class="page-dots">...</span>`;
+              }
+            }
+            
+            // Next Button
+            if (page < totalPages) {
+              html += `<button class="page-btn" onclick="renderPage(${page + 1}); scrollToArticles();">পরবর্তী →</button>`;
+            } else {
+              html += `<button class="page-btn" disabled>পরবর্তী →</button>`;
+            }
+            
+            container.innerHTML = html;
+          }
+        }
+      };
+
+      // Initial render for page 1
+      window.renderPage(1);
 
       if (featuredArticle) {
         featuredArticle.classList.remove('fade-in');
@@ -563,6 +621,13 @@ document.addEventListener('DOMContentLoaded', () => {
         behavior: 'smooth'
       });
     });
+  }
+
+  // Initialize pagination on home page load
+  if (document.querySelector('.home') || document.getElementById('posts-grid')) {
+    if (window.filterByCategory) {
+      window.filterByCategory('all');
+    }
   }
 });
 
