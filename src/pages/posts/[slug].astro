@@ -23,12 +23,14 @@ const hasPassword = !!post.data.password;
 
 function encryptContent(text, pass) {
   if (!pass) return '';
-  let result = '';
-  // simple XOR cipher for obfuscation
-  for (let i = 0; i < text.length; i++) {
-    result += String.fromCharCode(text.charCodeAt(i) ^ pass.charCodeAt(i % pass.length));
+  const textBytes = Buffer.from(text, 'utf-8');
+  const passBytes = Buffer.from(pass, 'utf-8');
+  
+  const encryptedBytes = new Uint8Array(textBytes.length);
+  for (let i = 0; i < textBytes.length; i++) {
+    encryptedBytes[i] = textBytes[i] ^ passBytes[i % passBytes.length];
   }
-  return Buffer.from(result).toString('base64');
+  return Buffer.from(encryptedBytes).toString('base64');
 }
 
 const encryptedBody = hasPassword ? encryptContent(post.body, post.data.password) : null;
@@ -173,11 +175,28 @@ const categories = [
                       if (btoa(pass) === expectedHash) {
                         try {
                           const encryptedStr = JSON.parse(document.getElementById('encrypted-post-data').textContent);
-                          const decoded = atob(encryptedStr);
-                          let decrypted = '';
-                          for (let i = 0; i < decoded.length; i++) {
-                            decrypted += String.fromCharCode(decoded.charCodeAt(i) ^ pass.charCodeAt(i % pass.length));
+                          
+                          // Base64 to bytes
+                          const binaryString = atob(encryptedStr);
+                          const encryptedBytes = new Uint8Array(binaryString.length);
+                          for (let i = 0; i < binaryString.length; i++) {
+                            encryptedBytes[i] = binaryString.charCodeAt(i);
                           }
+                          
+                          // Password to bytes
+                          const encoder = new TextEncoder();
+                          const passBytes = encoder.encode(pass);
+                          
+                          // XOR decrypt
+                          const decryptedBytes = new Uint8Array(encryptedBytes.length);
+                          for (let i = 0; i < encryptedBytes.length; i++) {
+                            decryptedBytes[i] = encryptedBytes[i] ^ passBytes[i % passBytes.length];
+                          }
+                          
+                          // Decode UTF-8 bytes to string
+                          const decoder = new TextDecoder();
+                          const decrypted = decoder.decode(decryptedBytes);
+                          
                           contentDiv.innerHTML = marked.parse(decrypted);
                           container.style.display = 'none';
                           contentDiv.style.display = 'block';
