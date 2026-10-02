@@ -1,0 +1,94 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+import { getAutoDate, getAutoReadTime, getAutoExcerpt } from '../../utils';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('posts');
+  
+  // Extract all unique categories
+  const categories = [...new Set(allPosts.map((post) => post.data.category).filter(Boolean))];
+
+  return categories.map((category) => {
+    return {
+      params: { category },
+      props: { posts: allPosts.filter((post) => post.data.category === category) },
+    };
+  });
+}
+
+const { category } = Astro.params;
+const { posts } = Astro.props;
+
+// Helper maps to get display name of category
+const categoryMap = {
+  'সাহিত্য': 'সাহিত্য ও কাব্য',
+  'কথাসাহিত্য': 'কথাসাহিত্য ও গল্প',
+  'দর্শন': 'দর্শন ও সমাজভাবনা',
+  'বিজ্ঞান': 'বিজ্ঞান ও প্রযুক্তি',
+  'ভ্রমণ': 'ভ্রমণ ও ঐতিহ্য',
+};
+
+const displayCategory = categoryMap[category] || category;
+
+const toBengaliNumber = (num) => {
+  const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+  return num?.toString().split('').map(d => banglaDigits[d] || d).join('');
+};
+
+const getPostImage = (post) => {
+  const rawImg = post?.data?.image || post?.data?.cover || post?.data?.coverImage;
+  if (!rawImg || typeof rawImg !== 'string') return null;
+  if (rawImg.startsWith('http') || rawImg.startsWith('/')) return rawImg;
+  return `/${rawImg}`;
+};
+---
+
+<Layout title={`${displayCategory} - সুবর্ণপত্র`}>
+  <Header />
+
+  <main class="site-main">
+    <div class="container">
+      <div class="page-header" style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-light); padding-bottom: 1rem; margin-top: 1rem;">
+        <h1 class="page-title" style="font-family: var(--font-serif); font-size: 2rem; color: var(--color-dark);">
+          বিভাগ: <span style="color: var(--color-gold);">{displayCategory}</span>
+        </h1>
+        <p style="color: var(--text-secondary); margin-top: 0.5rem; font-size: 1.1rem;">এই বিভাগে মোট {toBengaliNumber(posts.length)}টি লেখা রয়েছে</p>
+      </div>
+
+      <div class="articles-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+        {posts.map(post => {
+          const img = getPostImage(post);
+          return (
+            <article class="article-card">
+              <a href={`/posts/${post.slug}`} class="article-image-link">
+                <div class="article-image-wrapper">
+                  {img ? (
+                    <img src={img} alt={post.data.title} class="article-image" loading="lazy" />
+                  ) : (
+                    <div class="article-image-placeholder"></div>
+                  )}
+                  <span class="category-badge">{post.data.category}</span>
+                </div>
+              </a>
+              <div class="article-content">
+                <h3 class="article-title">
+                  <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+                </h3>
+                <p class="article-excerpt">{getAutoExcerpt(post)}</p>
+                <div class="article-meta">
+                  <span class="post-date">{getAutoDate(post)}</span>
+                  <span class="read-time">{getAutoReadTime(post)}</span>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
