@@ -12,6 +12,7 @@ const postsCollection = defineCollection({
     featured: z.boolean().default(false).optional().nullable(),
     image: z.string().optional().nullable(),
     excerpt: z.string().optional().nullable(),
+    password: z.string().optional().nullable(),
   }),
 });
 
