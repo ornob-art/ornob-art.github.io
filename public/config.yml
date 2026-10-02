@@ -1,0 +1,32 @@
+backend:
+  name: github
+  repo: ornob-art/ornob-art.github.io
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "posts"
+    label: "Post"
+    folder: "src/content/posts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Author", name: "author", widget: "string"}
+      - {label: "Date", name: "date", widget: "string", required: false}
+      - {label: "Category", name: "category", widget: "select", options: ["সাহিত্য", "কথাসাহিত্য", "দর্শন", "বিজ্ঞান", "ভ্রমণ"]}
+      - {label: "Badge", name: "badge", widget: "string", required: false}
+      - {label: "Read Time", name: "readTime", widget: "string", required: false}
+      - {label: "Featured", name: "featured", widget: "boolean", required: false, default: false}
+      - {label: "Cover Image", name: "image", widget: "image", required: false}
+      - {label: "Excerpt", name: "excerpt", widget: "text", required: false}
+      
+      - label: "Password (লক করার জন্য)"
+        name: "password"
+        widget: "string"
+        required: false
+        hint: "পোস্টটি পাসওয়ার্ড দিয়ে লক করতে চাইলে এখানে পাসওয়ার্ড দিন। উন্মুক্ত রাখতে চাইলে ফাঁকা রাখুন।"
+        
+      - {label: "Body", name: "body", widget: "markdown"}
