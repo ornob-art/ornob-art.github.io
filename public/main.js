@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================================================
      2. Category Filter (Tabs, Sidebar সূচীপত্র, Header Nav)
      ========================================================================== */
-  const scrollToArticles = () => {
+  window.scrollToArticles = () => {
     const articlesSection = document.getElementById('articles');
     if (articlesSection) {
       const header = document.getElementById('header');
