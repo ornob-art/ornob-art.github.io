@@ -149,9 +149,9 @@ const categories = [
                   <h3 style="font-family: var(--font-serif); margin-bottom: 0.5rem; color: var(--color-dark); font-size: 1.5rem;">এই লেখাটি সুরক্ষিত</h3>
                   <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">পড়তে চাইলে সঠিক পাসওয়ার্ড দিন:</p>
                   
-                  <div style="display: flex; justify-content: center; gap: 10px; max-width: 400px; margin: 0 auto;">
-                    <input type="password" id="post-password-input" placeholder="পাসওয়ার্ড দিন" style="padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 4px; font-size: 1rem; outline: none; flex: 1;">
-                    <button id="post-unlock-btn" style="padding: 0.75rem 1.5rem; background: var(--color-gold); color: white; border: none; border-radius: 4px; font-size: 1rem; cursor: pointer; font-family: var(--font-serif); font-weight: 600;">আনলক</button>
+                  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 400px; width: 100%; margin: 0 auto;">
+                    <input type="password" id="post-password-input" placeholder="পাসওয়ার্ড দিন" style="padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 4px; font-size: 1rem; outline: none; flex: 1 1 200px; box-sizing: border-box;">
+                    <button id="post-unlock-btn" style="padding: 0.75rem 1.5rem; background: var(--color-gold); color: white; border: none; border-radius: 4px; font-size: 1rem; cursor: pointer; font-family: var(--font-serif); font-weight: 600; flex: 0 1 auto; box-sizing: border-box;">আনলক</button>
                   </div>
                   <p id="password-error-msg" style="color: red; display: none; margin-top: 10px;">ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।</p>
                 </div>
