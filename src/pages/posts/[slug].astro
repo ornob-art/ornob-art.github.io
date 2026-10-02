@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getCollection } from 'astro:content';
 import { getAutoDate, getAutoReadTime, getAutoBadge, toBengaliDigits, getPostViews } from '../../utils';
+import { Buffer } from 'node:buffer';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
