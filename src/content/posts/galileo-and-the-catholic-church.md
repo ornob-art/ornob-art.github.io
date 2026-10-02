@@ -4,7 +4,7 @@ author: কাল্পনিক অরণ্য
 date: ১৭ সেপ্টেম্বর, ২০২৬
 category: দর্শন
 badge: বিজ্ঞান ও দর্শন
-featured: true
+featured: false
 image: /images/galileo-and-the-catholic-church.jpg
 excerpt: সপ্তদশ শতাব্দীর শুরুর দিকের ইউরোপ। চারিদিকে তখন ক্যাথলিক চার্চের
   একচ্ছত্র আধিপত্য এবং ধর্মের কঠোর অনুশাসন।
