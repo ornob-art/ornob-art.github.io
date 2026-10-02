@@ -1205,6 +1205,7 @@ body {
   .nav-menu {
     display: none;
     flex-direction: column;
+    flex-wrap: nowrap;
     width: 100%;
     background-color: var(--bg-card);
     border-top: 1px solid var(--border-subtle);
@@ -2114,6 +2115,7 @@ body {
   .nav-menu {
     display: flex;
     flex-direction: column;
+    flex-wrap: nowrap;
     width: 100%;
     overflow: hidden;
     max-height: 0;
@@ -2123,7 +2125,7 @@ body {
   }
   
   .nav-menu.active {
-    max-height: 400px;
+    max-height: 600px;
     opacity: 1;
     padding: 1rem 0;
   }
