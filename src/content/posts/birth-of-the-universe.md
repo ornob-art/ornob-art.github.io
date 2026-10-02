@@ -3,7 +3,7 @@ title: মহাবিশ্বের জন্ম
 author: কাল্পনিক অরণ্য
 date: ১৮ সেপ্টেম্বর, ২০২৬
 category: বিজ্ঞান
-badge: বিজ্ঞান ও দর্শন
+badge: বিজ্ঞান
 featured: false
 image: /images/birth-of-the-universe.jpg
 excerpt: আজ থেকে প্রায় ১৩৮০ কোটি বছর আগের কথা। মহাবিশ্বে তখন কোনো নক্ষত্র, গ্রহ
