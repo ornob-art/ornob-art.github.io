@@ -439,11 +439,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // Attach click listeners to sidebar TOC items
   tocLinks.forEach(link => {
     link.addEventListener('click', (e) => {
+      const cat = link.dataset.category;
       if (document.body.classList.contains('home')) {
         e.preventDefault();
-        const cat = link.dataset.category;
         filterByCategory(cat);
         scrollToArticles();
+      } else {
+        if (cat === 'all') {
+          window.location.href = '/';
+        } else {
+          window.location.href = `/category/${encodeURIComponent(cat)}`;
+        }
       }
     });
   });
