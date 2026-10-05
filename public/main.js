@@ -436,11 +436,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Helper to check if we are on a page with the posts grid
+  const hasPostsGrid = document.getElementById('posts-grid') !== null;
+
   // Attach click listeners to sidebar TOC items
   tocLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       const cat = link.dataset.category;
-      if (document.body.classList.contains('home')) {
+      if (hasPostsGrid) {
         e.preventDefault();
         filterByCategory(cat);
         scrollToArticles();
@@ -458,7 +461,7 @@ document.addEventListener('DOMContentLoaded', () => {
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       const cat = link.dataset.category;
-      if (cat && document.body.classList.contains('home')) {
+      if (cat && hasPostsGrid) {
         e.preventDefault();
         filterByCategory(cat);
         scrollToArticles();
@@ -474,7 +477,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.footer-links [data-category]').forEach(link => {
     link.addEventListener('click', (e) => {
       const cat = link.dataset.category;
-      if (cat && document.body.classList.contains('home')) {
+      if (cat && hasPostsGrid) {
         e.preventDefault();
         filterByCategory(cat);
         scrollToArticles();
