@@ -1,7 +1,7 @@
 ---
 title: আত্মা বা চেতনা
 author: কাল্পনিক অরণ্য
-date: ২৬ সেপ্টেম্বর, ২০২৬
+date: ২৮ সেপ্টেম্বর, ২০২৬
 category: বিজ্ঞান
 badge: বিজ্ঞান
 featured: false
