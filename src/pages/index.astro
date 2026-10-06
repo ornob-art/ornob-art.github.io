@@ -3,9 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { getCollection } from 'astro:content';
-import { getAutoDate, getAutoReadTime, getAutoExcerpt, getAutoBadge, getPostViews } from '../utils';
+import { getAutoDate, getAutoReadTime, getAutoExcerpt, getAutoBadge, getPostViews, getPostTimestamp } from '../utils';
 
-const allPosts = await getCollection('posts');
+const allPosts = (await getCollection('posts')).sort((a, b) => getPostTimestamp(b) - getPostTimestamp(a));
 const featuredPost = allPosts.find(post => post.data.featured) || allPosts[0];
 const regularPosts = allPosts.filter(post => post.id !== featuredPost?.id);
 
