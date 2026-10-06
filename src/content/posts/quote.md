@@ -7,7 +7,42 @@ badge: Quote
 featured: false
 excerpt: Password protected...
 ---
-
+<style>
+  .quotes-wrapper {
+    max-width: 760px;
+    margin: 2rem auto;
+    font-family: inherit;
+  }
+  .quote-entry {
+    margin: 1.8rem 0;
+    padding: 0.8rem 0 1.2rem 1.4rem;
+    border-left: 3px solid rgba(120, 120, 120, 0.35);
+    border-bottom: 1px dashed rgba(120, 120, 120, 0.15);
+  }
+  .quote-text {
+    margin: 0;
+    font-size: 1.08rem;
+    line-height: 1.8;
+    color: inherit;
+  }
+  .quote-author {
+    display: block;
+    margin-top: 0.6rem;
+    font-size: 0.92rem;
+    font-style: italic;
+    opacity: 0.75;
+    text-align: right;
+  }
+  .quote-author::before {
+    content: "— ";
+  }
+  .quote-note {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+</style>
 
 <div class="quotes-wrapper">
 
@@ -503,4 +538,3 @@ excerpt: Password protected...
   </div>
 
 </div>
-
