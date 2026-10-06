@@ -1,6 +1,38 @@
-﻿export const toBengaliDigits = (numStr: string | number) => {
+export const toBengaliDigits = (numStr: string | number) => {
   const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
   return numStr.toString().replace(/\d/g, d => banglaDigits[parseInt(d)]);
+};
+
+export const toEnglishDigits = (numStr: string) => {
+  const banglaToEnglishMap: { [key: string]: string } = {
+    '০': '0', '১': '1', '২': '2', '৩': '3', '৪': '4',
+    '৫': '5', '৬': '6', '৭': '7', '৮': '8', '৯': '9'
+  };
+  return numStr.replace(/[০-৯]/g, match => banglaToEnglishMap[match]);
+};
+
+export const getPostTimestamp = (post: any) => {
+  if (!post.data.date) return 0;
+  
+  const bnMonths: { [key: string]: string } = {
+    'জানুয়ারি': 'January', 'ফেব্রুয়ারি': 'February', 'মার্চ': 'March',
+    'এপ্রিল': 'April', 'মে': 'May', 'জুন': 'June', 'জুলাই': 'July',
+    'আগস্ট': 'August', 'সেপ্টেম্বর': 'September', 'অক্টোবর': 'October',
+    'নভেম্বর': 'November', 'ডিসেম্বর': 'December'
+  };
+  
+  let dateStr = post.data.date;
+  dateStr = toEnglishDigits(dateStr);
+  
+  for (const [bn, en] of Object.entries(bnMonths)) {
+    if (dateStr.includes(bn)) {
+      dateStr = dateStr.replace(bn, en);
+      break;
+    }
+  }
+  
+  const timestamp = Date.parse(dateStr);
+  return isNaN(timestamp) ? 0 : timestamp;
 };
 
 export const getAutoDate = (post: any) => {
