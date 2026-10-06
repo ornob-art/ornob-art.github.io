@@ -1,7 +1,7 @@
 ---
 title: Quote
 author: কাল্পনিক অরণ্য
-password: "127664"
+password: "01712127664"
 date: ২০ সেপ্টেম্বর, ২০২৬
 category: সাহিত্য
 badge: Quote
