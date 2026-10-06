@@ -1,20 +1,5 @@
 ---
 // src/components/Header.astro
-import { getCollection } from 'astro:content';
-import { getAutoBadge, getAutoExcerpt } from '../utils';
-
-const posts = await getCollection('posts');
-const searchData = posts.map(post => ({
-  id: post.id,
-  slug: post.slug,
-  title: post.data.title || '',
-  author: post.data.author || '',
-  category: post.data.category || '',
-  badge: getAutoBadge(post),
-  excerpt: getAutoExcerpt(post),
-  image: post.data.image || null,
-  content: post.body || ''
-}));
 ---
 
 <style is:global>
@@ -190,10 +175,15 @@ const searchData = posts.map(post => ({
   </div>
 </header>
 
-<script is:inline define:vars={{ searchData }}>
-  window.SEARCH_DATA = searchData;
+<script is:inline>
+  window.SEARCH_DATA = null;
 
   const initRealtimeSearch = () => {
+    // Fetch search data asynchronously
+    fetch('/search.json')
+      .then(res => res.json())
+      .then(data => { window.SEARCH_DATA = data; })
+      .catch(err => console.error("Error loading search index:", err));
     const rawInput = document.getElementById('search-input');
     const rawClearBtn = document.getElementById('search-clear-btn');
     const searchContainer = document.getElementById('search-container');
