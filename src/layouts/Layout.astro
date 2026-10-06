@@ -19,7 +19,33 @@
 </head>
 <body class="home">
   <slot />
+  
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTopBtn" aria-label="উপরে যান" class="scroll-to-top">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+
   <!-- Script -->
   <script is:inline src="/main.js?v=4"></script>
+  
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const scrollBtn = document.getElementById('scrollToTopBtn');
+      if (scrollBtn) {
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 300) {
+            scrollBtn.classList.add('show');
+          } else {
+            scrollBtn.classList.remove('show');
+          }
+        });
+        scrollBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
 </body>
 </html>
