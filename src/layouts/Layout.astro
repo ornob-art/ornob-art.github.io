@@ -31,7 +31,7 @@
   <script is:inline src="/main.js?v=4"></script>
   
   <script is:inline>
-    document.addEventListener('DOMContentLoaded', () => {
+    (function() {
       const scrollBtn = document.getElementById('scrollToTopBtn');
       if (scrollBtn) {
         window.addEventListener('scroll', () => {
@@ -45,7 +45,7 @@
           window.scrollTo({ top: 0, behavior: 'smooth' });
         });
       }
-    });
+    })();
   </script>
 </body>
 </html>
