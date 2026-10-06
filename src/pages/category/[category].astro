@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getCollection } from 'astro:content';
-import { getAutoDate, getAutoReadTime, getAutoExcerpt, getAutoBadge } from '../../utils';
+import { getAutoDate, getAutoReadTime, getAutoExcerpt, getAutoBadge, getPostTimestamp } from '../../utils';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('posts');
@@ -14,7 +14,7 @@ export async function getStaticPaths() {
   return categories.map((category) => {
     return {
       params: { category },
-      props: { posts: allPosts.filter((post) => post.data.category === category) },
+      props: { posts: allPosts.filter((post) => post.data.category === category).sort((a, b) => getPostTimestamp(b) - getPostTimestamp(a)) },
     };
   });
 }
