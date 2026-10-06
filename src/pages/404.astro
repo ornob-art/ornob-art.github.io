@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="৪০৪ - পৃষ্ঠা পাওয়া যায়নি | সুবর্ণপত্র">
+  <Header />
+  
+  <main class="site-main">
+    <div class="container">
+      <div class="single-article" style="text-align: center; max-width: 600px; margin: 4rem auto; padding: 4rem 2rem;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-gold); margin-bottom: 1.5rem; display: inline-block;">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <h1 class="single-title" style="font-size: 4rem; margin-bottom: 0.5rem; text-align: center;">৪০৪</h1>
+        <h2 class="featured-title" style="font-size: 1.8rem; margin-bottom: 1rem; text-align: center; justify-content: center;">পৃষ্ঠাটি পাওয়া যায়নি</h2>
+        <p class="featured-excerpt" style="margin-bottom: 2.5rem; text-align: center;">
+          আপনি যে পৃষ্ঠাটি খুঁজছেন তা মুছে ফেলা হয়েছে, নাম পরিবর্তন করা হয়েছে বা সাময়িকভাবে অনুপলব্ধ হতে পারে।
+        </p>
+        <a href="/" class="filter-btn active" style="display: inline-block; padding: 0.8rem 2rem; font-size: 1.1rem; text-decoration: none;">
+          নীড়ে ফিরে যান
+        </a>
+      </div>
+    </div>
+  </main>
+  
+  <Footer />
+</Layout>
