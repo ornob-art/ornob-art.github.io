@@ -12,7 +12,8 @@ const searchData = posts.map(post => ({
   category: post.data.category || '',
   badge: getAutoBadge(post),
   excerpt: getAutoExcerpt(post),
-  image: post.data.image || null
+  image: post.data.image || null,
+  content: post.body || ''
 }));
 ---
 
@@ -250,6 +251,7 @@ const searchData = posts.map(post => ({
       const matchedPosts = allData.filter(post => {
         return (post.title && post.title.toLowerCase().includes(query)) ||
                (post.excerpt && post.excerpt.toLowerCase().includes(query)) ||
+               (post.content && post.content.toLowerCase().includes(query)) ||
                (post.author && post.author.toLowerCase().includes(query)) ||
                (post.category && post.category.toLowerCase().includes(query)) ||
                (post.badge && post.badge.toLowerCase().includes(query));
