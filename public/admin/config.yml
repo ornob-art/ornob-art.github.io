@@ -16,7 +16,7 @@ collections:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Author", name: "author", widget: "string"}
       - {label: "Date", name: "date", widget: "string", required: false}
-      - {label: "Category", name: "category", widget: "select", options: ["সাহিত্য", "কথাসাহিত্য", "দর্শন", "বিজ্ঞান", "ভ্রমণ"]}
+      - {label: "Category", name: "category", widget: "select", options: ["দর্শন", "বিজ্ঞান", "রহস্য", "সংগীত", "মনোবিজ্ঞান", "রাজনীতি ও ইতিহাস", "ব্যক্তিগত", "অন্যান্য"]}
       - {label: "Badge", name: "badge", widget: "string", required: false}
       - {label: "Read Time", name: "readTime", widget: "string", required: false}
       - {label: "Featured", name: "featured", widget: "boolean", required: false, default: false}
