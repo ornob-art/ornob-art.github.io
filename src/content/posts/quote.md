@@ -2,7 +2,7 @@
 title: Quote
 author: কাল্পনিক অরণ্য
 date: ২০ সেপ্টেম্বর, ২০২৬
-category: বিজ্ঞান
+category: ব্যক্তিগত
 badge: Quote
 featured: false
 excerpt: Password protected...
