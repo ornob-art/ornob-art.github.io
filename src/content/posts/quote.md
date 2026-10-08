@@ -1,6 +1,7 @@
 ---
 title: Quote
 author: কাল্পনিক অরণ্য
+password: "01712127664"
 date: ২০ সেপ্টেম্বর, ২০২৬
 category: ব্যক্তিগত
 badge: Quote
