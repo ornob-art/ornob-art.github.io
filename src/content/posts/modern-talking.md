@@ -2,8 +2,8 @@
 title: Modern Talking
 author: কাল্পনিক অরণ্য
 date: ৩০ সেপ্টেম্বর, ২০২৬
-category: কথাসাহিত্য
-badge: কথাসাহিত্য
+category: সংগীত
+badge: সংগীত
 featured: false
 image: /images/modern-talking.jpg
 excerpt: Modern Talking হলো জার্মানির ইতিহাসের অন্যতম সফল এবং জনপ্রিয় একটি পপ
