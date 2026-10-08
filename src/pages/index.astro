@@ -20,11 +20,8 @@ const categoryCounts = allPosts.reduce((acc, post) => {
 }, {});
 
 const categories = [
-  { id: 'সাহিত্য', label: 'সাহিত্য ও কাব্য' },
-  { id: 'কথাসাহিত্য', label: 'কথাসাহিত্য ও গল্প' },
   { id: 'দর্শন', label: 'দর্শন ও সমাজভাবনা' },
   { id: 'বিজ্ঞান', label: 'বিজ্ঞান ও প্রযুক্তি' },
-  { id: 'ভ্রমণ', label: 'ভ্রমণ ও ঐতিহ্য' },
   { id: 'রহস্য', label: 'রহস্য' },
   { id: 'সংগীত', label: 'সংগীত' },
   { id: 'মনোবিজ্ঞান', label: 'মনোবিজ্ঞান' },
@@ -109,8 +106,6 @@ const featuredImg = getPostImage(featuredPost);
             <h3 class="section-title">সাম্প্রতিক রচনাবলী</h3>
             <div class="filter-tabs">
               <button class="filter-btn active" data-filter="all">সকল রচনা</button>
-              <button class="filter-btn" data-filter="সাহিত্য">সাহিত্য</button>
-              <button class="filter-btn" data-filter="কথাসাহিত্য">গল্প</button>
               <button class="filter-btn" data-filter="বিজ্ঞান">বিজ্ঞান</button>
               <button class="filter-btn" data-filter="দর্শন">দর্শন</button>
               <button class="filter-btn" data-filter="রহস্য">রহস্য</button>
