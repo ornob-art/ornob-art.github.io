@@ -1,13 +1,43 @@
 ---
-// Optional, but we'll include styles.css directly from public in head for now
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const { 
+  title = "সুবর্ণপত্র — চিন্তা, সাহিত্য ও সংস্কৃতির নান্দনিক প্রকাশ", 
+  description = "সুবর্ণপত্র - সাহিত্য, দর্শন, কথাসাহিত্য, বিজ্ঞান ও সংস্কৃতির এক অনন্য বাংলা ব্লগ ও সাময়িকী।",
+  image = "/favicon.png"
+} = Astro.props;
+
+// Create absolute URL for Open Graph image
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
+const ogImage = new URL(image, Astro.site || Astro.url);
 ---
 <!DOCTYPE html>
 <html lang="bn">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>সুবর্ণপত্র — চিন্তা, সাহিত্য ও সংস্কৃতির নান্দনিক প্রকাশ</title>
-  <meta name="description" content="সুবর্ণপত্র - সাহিত্য, দর্শন, কথাসাহিত্য, বিজ্ঞান ও সংস্কৃতির এক অনন্য বাংলা ব্লগ ও সাময়িকী।">
+  
+  <title>{title}</title>
+  <meta name="title" content={title} />
+  <meta name="description" content={description} />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImage} />
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content={canonicalURL} />
+  <meta property="twitter:title" content={title} />
+  <meta property="twitter:description" content={description} />
+  <meta property="twitter:image" content={ogImage} />
   
   <!-- Google Fonts: Noto Serif Bengali & Hind Siliguri -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
