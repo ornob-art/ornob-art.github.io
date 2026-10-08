@@ -2,8 +2,8 @@
 title: Ace of Base
 author: কাল্পনিক অরণ্য
 date: ৩০ সেপ্টেম্বর, ২০২৬
-category: কথাসাহিত্য
-badge: কথাসাহিত্য
+category: সংগীত
+badge: সংগীত
 featured: false
 image: /images/ace-of-base.jpg
 excerpt: নব্বইয়ের দশকের বৈশ্বিক পপ মিউজিক এবং ইউরোড্যান্সের ইতিহাসে এক
