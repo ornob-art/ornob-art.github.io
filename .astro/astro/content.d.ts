@@ -211,6 +211,13 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
+"dancing-plague-of-1518.md": {
+	id: "dancing-plague-of-1518.md";
+  slug: "dancing-plague-of-1518";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
 "dark-matter-dark-energy.md": {
 	id: "dark-matter-dark-energy.md";
   slug: "dark-matter-dark-energy";
@@ -372,6 +379,13 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
+"phineas-gage-a-miraculous-chapter-in-the-history-of-medicine.md": {
+	id: "phineas-gage-a-miraculous-chapter-in-the-history-of-medicine.md";
+  slug: "phineas-gage-a-miraculous-chapter-in-the-history-of-medicine";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
 "quote.md": {
 	id: "quote.md";
   slug: "quote";
@@ -421,6 +435,13 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
+"the-chemistry-of-creation-is-suffering-the-only-fuel-for-art.md": {
+	id: "the-chemistry-of-creation-is-suffering-the-only-fuel-for-art.md";
+  slug: "the-chemistry-of-creation-is-suffering-the-only-fuel-for-art";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
 "the-end-of-the-solar-system.md": {
 	id: "the-end-of-the-solar-system.md";
   slug: "the-end-of-the-solar-system";
@@ -449,6 +470,20 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
+"the-mystery-of-the-disappearance-of-d-b-cooper.md": {
+	id: "the-mystery-of-the-disappearance-of-d-b-cooper.md";
+  slug: "the-mystery-of-the-disappearance-of-d-b-cooper";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
+"the-nature-of-karma-in-the-conflict-between-wisdom-and-ignorance.md": {
+	id: "the-nature-of-karma-in-the-conflict-between-wisdom-and-ignorance.md";
+  slug: "the-nature-of-karma-in-the-conflict-between-wisdom-and-ignorance";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
 "the-origin-of-the-first-life.md": {
 	id: "the-origin-of-the-first-life.md";
   slug: "the-origin-of-the-first-life";
@@ -463,9 +498,23 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
+"the-unsolved-mystery-of-somerton-beach.md": {
+	id: "the-unsolved-mystery-of-somerton-beach.md";
+  slug: "the-unsolved-mystery-of-somerton-beach";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
 "the-unsolved-story-of-the-dyatlov-pass.md": {
 	id: "the-unsolved-story-of-the-dyatlov-pass.md";
   slug: "the-unsolved-story-of-the-dyatlov-pass";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
+"tunguska-event.md": {
+	id: "tunguska-event.md";
+  slug: "tunguska-event";
   body: string;
   collection: "posts";
   data: InferEntrySchema<"posts">

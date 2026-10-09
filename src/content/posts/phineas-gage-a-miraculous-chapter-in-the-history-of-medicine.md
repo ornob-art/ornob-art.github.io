@@ -1,5 +1,5 @@
 ---
-title: ফিনিয়াস গেজ: চিকিৎসাবিজ্ঞানের ইতিহাসের এক অলৌকিক অধ্যায়
+title: "ফিনিয়াস গেজ: চিকিৎসাবিজ্ঞানের ইতিহাসের এক অলৌকিক অধ্যায়"
 author: কাল্পনিক অরণ্য
 image: /images/phineas-gage-a-miraculous-chapter-in-the-history-of-medicine.jpg
 date: ৫ অক্টোবর, ২০২৬
