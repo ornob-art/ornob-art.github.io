@@ -28,6 +28,8 @@ collections:
             value: "রহস্য"
           - label: "সংগীত"
             value: "সংগীত"
+          - label: "চলচ্চিত্র"
+            value: "চলচ্চিত্র"
           - label: "মনোবিজ্ঞান"
             value: "মনোবিজ্ঞান"
           - label: "বিশ্ব রাজনীতি ও ইতিহাস"

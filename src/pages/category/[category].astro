@@ -5,11 +5,24 @@ import Footer from '../../components/Footer.astro';
 import { getCollection } from 'astro:content';
 import { getAutoDate, getAutoReadTime, getAutoExcerpt, getAutoBadge, getPostTimestamp } from '../../utils';
 
+const categoryMap = {
+  'দর্শন': 'দর্শন ও সমাজভাবনা',
+  'বিজ্ঞান': 'বিজ্ঞান ও প্রযুক্তি',
+  'রহস্য': 'রহস্য',
+  'সংগীত': 'সংগীত',
+  'চলচ্চিত্র': 'চলচ্চিত্র',
+  'মনোবিজ্ঞান': 'মনোবিজ্ঞান',
+  'রাজনীতি-ও-ইতিহাস': 'বিশ্ব রাজনীতি ও ইতিহাস',
+  'ব্যক্তিগত': 'ব্যক্তিগত',
+  'অন্যান্য': 'অন্যান্য',
+};
+
 export async function getStaticPaths() {
   const allPosts = await getCollection('posts');
   
-  // Extract all unique categories
-  const categories = [...new Set(allPosts.map((post) => post.data.category).filter(Boolean))];
+  // Extract all unique categories including predefined ones
+  const defaultCategories = ['দর্শন', 'বিজ্ঞান', 'রহস্য', 'সংগীত', 'চলচ্চিত্র', 'মনোবিজ্ঞান', 'রাজনীতি-ও-ইতিহাস', 'ব্যক্তিগত', 'অন্যান্য'];
+  const categories = [...new Set([...defaultCategories, ...allPosts.map((post) => post.data.category).filter(Boolean)])];
 
   return categories.map((category) => {
     return {
@@ -21,18 +34,6 @@ export async function getStaticPaths() {
 
 const { category } = Astro.params;
 const { posts } = Astro.props;
-
-// Helper maps to get display name of category
-const categoryMap = {
-  'দর্শন': 'দর্শন ও সমাজভাবনা',
-  'বিজ্ঞান': 'বিজ্ঞান ও প্রযুক্তি',
-  'রহস্য': 'রহস্য',
-  'সংগীত': 'সংগীত',
-  'মনোবিজ্ঞান': 'মনোবিজ্ঞান',
-  'রাজনীতি-ও-ইতিহাস': 'বিশ্ব রাজনীতি ও ইতিহাস',
-  'ব্যক্তিগত': 'ব্যক্তিগত',
-  'অন্যান্য': 'অন্যান্য',
-};
 
 const displayCategory = categoryMap[category] || category;
 
@@ -61,48 +62,61 @@ const getPostImage = (post) => {
         <p style="color: var(--text-secondary); margin-top: 0.5rem; font-size: 1.1rem;">এই বিভাগে মোট {toBengaliNumber(posts.length)}টি লেখা রয়েছে</p>
       </div>
 
-      <div class="posts-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.6rem; margin-bottom: 4rem;">
-        {posts.map((post, index) => {
-          const bgClass = `thumb-bg-${(index % 6) + 1}`;
-          const postImg = getPostImage(post);
-          return (
-            <article class="post-card" data-category={post.data.category} data-id={index + 1}>
-              <div class={`post-card-thumb ${!postImg ? bgClass : ''}`} style="position: relative; overflow: hidden;">
-                <span class="post-card-badge" style="z-index: 2;">{getAutoBadge(post)}</span>
-                {postImg ? (
-                  <img 
-                    src={postImg} 
-                    alt={post.data.title} 
-                    class="post-card-img" 
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; display: block;" 
-                  />
-                ) : (
-                  <svg class="thumb-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                  </svg>
-                )}
-              </div>
-              <div class="post-card-body">
-                <h3 class="post-card-title">
-                  <a href={`/posts/${post.slug}`} style="color: inherit; text-decoration: none;">{post.data.title}</a>
-                </h3>
-                <p class="post-card-excerpt">
-                  {getAutoExcerpt(post)}
-                </p>
-                <div class="post-card-footer">
-                  <div class="post-card-author">
-                    <span>{post.data.author}</span> • <span>{getAutoDate(post)}</span>
-                  </div>
-                  <a href={`/posts/${post.slug}`} class="post-btn-link" style="text-decoration: none;">
-                    <span>পড়ুন</span> →
-                  </a>
+      {posts.length === 0 ? (
+        <div style="text-align: center; padding: 4rem 1.5rem; background: var(--bg-card, #ffffff); border-radius: 12px; border: 1px solid var(--border-light, #e8e2d5); margin-bottom: 4rem;">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin: 0 auto 1rem; color: var(--color-gold, #b47214); opacity: 0.8; display: block;">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <h3 style="font-family: var(--font-serif); font-size: 1.3rem; color: var(--color-dark, #1e2022); margin-bottom: 0.5rem;">এই বিভাগে এখনো কোনো লেখা প্রকাশিত হয়নি</h3>
+          <p style="color: var(--text-secondary, #666); font-size: 0.95rem; margin-bottom: 1.5rem;">শীঘ্রই এই বিভাগে নতুন মননশীল লেখা যুক্ত করা হবে।</p>
+          <a href="/" style="display: inline-block; padding: 0.6rem 1.4rem; background: var(--color-gold, #b47214); color: #fff; text-decoration: none; border-radius: 6px; font-weight: 500;">প্রচ্ছদে ফিরে যান</a>
+        </div>
+      ) : (
+        <div class="posts-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.6rem; margin-bottom: 4rem;">
+          {posts.map((post, index) => {
+            const bgClass = `thumb-bg-${(index % 6) + 1}`;
+            const postImg = getPostImage(post);
+            return (
+              <article class="post-card" data-category={post.data.category} data-id={index + 1}>
+                <div class={`post-card-thumb ${!postImg ? bgClass : ''}`} style="position: relative; overflow: hidden;">
+                  <span class="post-card-badge" style="z-index: 2;">{getAutoBadge(post)}</span>
+                  {postImg ? (
+                    <img 
+                      src={postImg} 
+                      alt={post.data.title} 
+                      class="post-card-img" 
+                      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; display: block;" 
+                    />
+                  ) : (
+                    <svg class="thumb-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                  )}
                 </div>
-              </div>
-            </article>
-          );
-        })}
-      </div>
+                <div class="post-card-body">
+                  <h3 class="post-card-title">
+                    <a href={`/posts/${post.slug}`} style="color: inherit; text-decoration: none;">{post.data.title}</a>
+                  </h3>
+                  <p class="post-card-excerpt">
+                    {getAutoExcerpt(post)}
+                  </p>
+                  <div class="post-card-footer">
+                    <div class="post-card-author">
+                      <span>{post.data.author}</span> • <span>{getAutoDate(post)}</span>
+                    </div>
+                    <a href={`/posts/${post.slug}`} class="post-btn-link" style="text-decoration: none;">
+                      <span>পড়ুন</span> →
+                    </a>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      )}
     </div>
   </main>
 

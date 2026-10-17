@@ -162,6 +162,13 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
+"becoming-human-the-journey-from-biological-being-to-moral-existence.md": {
+	id: "becoming-human-the-journey-from-biological-being-to-moral-existence.md";
+  slug: "becoming-human-the-journey-from-biological-being-to-moral-existence";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
 "before-the-big-bang-and-the-end-of-the-universe.md": {
 	id: "before-the-big-bang-and-the-end-of-the-universe.md";
   slug: "before-the-big-bang-and-the-end-of-the-universe";
@@ -207,6 +214,13 @@ declare module 'astro:content' {
 "copernicus-silent-revolution.md": {
 	id: "copernicus-silent-revolution.md";
   slug: "copernicus-silent-revolution";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
+"cultivating-peace-in-the-garden-of-the-mind.md": {
+	id: "cultivating-peace-in-the-garden-of-the-mind.md";
+  slug: "cultivating-peace-in-the-garden-of-the-mind";
   body: string;
   collection: "posts";
   data: InferEntrySchema<"posts">
@@ -263,6 +277,13 @@ declare module 'astro:content' {
 "earths-magnetic-field-the-real-mystery-inside.md": {
 	id: "earths-magnetic-field-the-real-mystery-inside.md";
   slug: "earths-magnetic-field-the-real-mystery-inside";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
+"edward-mordrake-tragedy.md": {
+	id: "edward-mordrake-tragedy.md";
+  slug: "edward-mordrake-tragedy";
   body: string;
   collection: "posts";
   data: InferEntrySchema<"posts">
@@ -330,6 +351,13 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
+"lake-nyos-tragedy.md": {
+	id: "lake-nyos-tragedy.md";
+  slug: "lake-nyos-tragedy";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
 "lethologica.md": {
 	id: "lethologica.md";
   slug: "lethologica";
@@ -372,9 +400,23 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
+"movies-south-korea-2004-3-iron.md": {
+	id: "movies-south-korea-2004-3-iron.md";
+  slug: "movies-south-korea-2004-3-iron";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
 "one-thousand-and-one-nights.md": {
 	id: "one-thousand-and-one-nights.md";
   slug: "one-thousand-and-one-nights";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
+"palmyra-atoll-fairytale-tomb-on-the-cursed-island.md": {
+	id: "palmyra-atoll-fairytale-tomb-on-the-cursed-island.md";
+  slug: "palmyra-atoll-fairytale-tomb-on-the-cursed-island";
   body: string;
   collection: "posts";
   data: InferEntrySchema<"posts">
@@ -389,6 +431,20 @@ declare module 'astro:content' {
 "quote.md": {
 	id: "quote.md";
   slug: "quote";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
+"shenzhou-5-and-the-mysterious-sounds-of-space.md": {
+	id: "shenzhou-5-and-the-mysterious-sounds-of-space.md";
+  slug: "shenzhou-5-and-the-mysterious-sounds-of-space";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
+"soul-brain-life-and-death-man-between-faith-and-science.md": {
+	id: "soul-brain-life-and-death-man-between-faith-and-science.md";
+  slug: "soul-brain-life-and-death-man-between-faith-and-science";
   body: string;
   collection: "posts";
   data: InferEntrySchema<"posts">
@@ -449,6 +505,20 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
+"the-history-of-krakatoa-and-its-destruction.md": {
+	id: "the-history-of-krakatoa-and-its-destruction.md";
+  slug: "the-history-of-krakatoa-and-its-destruction";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
+"the-man-from-taured.md": {
+	id: "the-man-from-taured.md";
+  slug: "the-man-from-taured";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
 "the-mind-trapped-in-time.md": {
 	id: "the-mind-trapped-in-time.md";
   slug: "the-mind-trapped-in-time";
@@ -491,9 +561,51 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
+"the-philosophy-of-emotional-memory-and-conscious-choice.md": {
+	id: "the-philosophy-of-emotional-memory-and-conscious-choice.md";
+  slug: "the-philosophy-of-emotional-memory-and-conscious-choice";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
 "the-philosophy-of-imperfection-why-mistakes-are-the-driving-force-of-civilization.md": {
 	id: "the-philosophy-of-imperfection-why-mistakes-are-the-driving-force-of-civilization.md";
   slug: "the-philosophy-of-imperfection-why-mistakes-are-the-driving-force-of-civilization";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
+"the-silence-of-the-soul-in-the-noise-of-pleasure--the-philosophy-of-the-gita-and-modern-psychology.md": {
+	id: "the-silence-of-the-soul-in-the-noise-of-pleasure--the-philosophy-of-the-gita-and-modern-psychology.md";
+  slug: "the-silence-of-the-soul-in-the-noise-of-pleasure--the-philosophy-of-the-gita-and-modern-psychology";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
+"the-silent-lighthouse-of-flannan-island.md": {
+	id: "the-silent-lighthouse-of-flannan-island.md";
+  slug: "the-silent-lighthouse-of-flannan-island";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
+"the-sos-incident.md": {
+	id: "the-sos-incident.md";
+  slug: "the-sos-incident";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
+"the-thoughts-we-waste-precious-time-in-life.md": {
+	id: "the-thoughts-we-waste-precious-time-in-life.md";
+  slug: "the-thoughts-we-waste-precious-time-in-life";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
+"the-toxic-woman.md": {
+	id: "the-toxic-woman.md";
+  slug: "the-toxic-woman";
   body: string;
   collection: "posts";
   data: InferEntrySchema<"posts">
@@ -512,9 +624,9 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
-"tunguska-event.md": {
-	id: "tunguska-event.md";
-  slug: "tunguska-event";
+"tunguska-event-1908.md": {
+	id: "tunguska-event-1908.md";
+  slug: "tunguska-event-1908";
   body: string;
   collection: "posts";
   data: InferEntrySchema<"posts">
