@@ -1,5 +1,5 @@
 ---
-title: "Oasis। (2002)"
+title: "Oasis (2002)"
 author: কাল্পনিক অরণ্য
 date: ১ অক্টোবর, ২০২৬
 category: চলচ্চিত্র
